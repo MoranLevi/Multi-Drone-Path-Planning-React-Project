@@ -36,51 +36,5 @@ button {
     display: flex;
     flex-direction: column;
     gap: calc(5px + 1vw);
-    padding: 3vh;
-}
-
-#counter-section {
-    display: grid;
-    justify-content: center;
-    align-content: center;
-    gap: calc(5px + 1vw);
-}
-
-#info-section {
-    display: grid;
-    justify-content: center;
-}
-
-#info {
-    text-align: left;
-    font-size: calc(10px + .8vw);
-    
-    display: grid;
-    grid-template-columns: auto auto;
-    gap: 1em;
-}
-
-.counter-buttons-container {
-    display: flex;
-    gap: 1em;
-}
-
-.react-logo-container {
-    display: flex;
-    justify-content: center;
-}
-
-.react-logo {
-    height: calc(10px + 15vh);
-    pointer-events: none;
-    animation: spin infinite 20s linear;
-}
-
-@keyframes spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
+    /* padding: 3vh; */
 }

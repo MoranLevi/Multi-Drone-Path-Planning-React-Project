@@ -1,9 +1,11 @@
 import './App.css';
 import { useAppSelector } from './redux/hooks';
+import { HashRouter as Router, Routes , Route } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import React from 'react';
-import background from "./images/background.jpg";
+import background from "./images/background.jpeg";
+import Home from './components/Home/Home';
 
 function App() {
     const dispatch = useDispatch();
@@ -51,12 +53,16 @@ function App() {
 
     return (
         <div id="App" style={{
-            backgroundImage:`url(./images/background.jpg)`,
+            backgroundImage:`url(${background})`,
             minHeight: "100vh",
-            backgroundPosition: "center",
             backgroundSize: "cover"
             }}>
             
+            <Router>
+                <Routes>
+                    <Route path="/" element={<Home />}/>
+                </Routes> 
+            </Router>  
         </div>
     );
 }
