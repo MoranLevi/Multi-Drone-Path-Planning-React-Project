@@ -6,6 +6,7 @@ import { useEffect } from 'react';
 import React from 'react';
 import background from "./images/background.jpeg";
 import Home from './components/Home/Home';
+import InsertData from './components/InsertData/InsertData';
 
 function App() {
     const dispatch = useDispatch();
@@ -61,6 +62,7 @@ function App() {
             <Router>
                 <Routes>
                     <Route path="/" element={<Home />}/>
+                    <Route path="/insertData" element={<InsertData />}/>
                 </Routes> 
             </Router>  
         </div>
