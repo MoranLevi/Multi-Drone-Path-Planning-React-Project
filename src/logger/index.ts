@@ -1,5 +1,5 @@
 import loglevel, { LogLevelDesc } from 'loglevel';
-import { AppPackageName } from 'src/constants/AppPackageName';
+import { AppPackageName } from 'src/constants';
 import { ILogger } from './ILogger';
 
 export enum ELogLevel {

@@ -1,5 +1,5 @@
 import { createLogger } from 'redux-logger';
-import { AppPackageName } from 'src/constants/AppPackageName';
+import { AppPackageName } from 'src/constants';
 import { LoggerFactory } from 'src/logger';
 
 export const reduxLogger = createLogger({

@@ -1,31 +1,28 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import './colors.css';
 import App from './App';
 import { Provider } from 'react-redux';
 import { store } from './redux/store';
 import { ELogLevel, ILoggerConfiguration, LoggerFactory } from './logger';
-import { AppPackageName } from './constants/AppPackageName';
-import { Configuration } from './constants/Configuration';
 
 
 // First, this config will be the default one, util we fetch our one from backend
 const DEFAULT_CONFIG: ILoggerConfiguration[] = [
     {
-        loggerName: AppPackageName.APP,
+        loggerName: 'components',
         loggerLevel: ELogLevel.DEBUG
     },
     {
-        loggerName: AppPackageName.SRC.LOGGER,
+        loggerName: 'reducers',
         loggerLevel: ELogLevel.TRACE
     },
     {
-        loggerName: AppPackageName.SRC.REDUX.ACTIONS.TODO,
+        loggerName: 'CounterActions',
         loggerLevel: ELogLevel.DEBUG
     },
     {
-        loggerName: AppPackageName.SRC.REDUX.REDUCERS,
+        loggerName: 'app',
         loggerLevel: ELogLevel.DEBUG
     },
 ]
@@ -36,7 +33,7 @@ const DEFAULT_CONFIG: ILoggerConfiguration[] = [
 
 // Finally, on each localStorage user update - we update the logger config again
 
-Configuration.load();
+
 LoggerFactory.init(DEFAULT_CONFIG);
 
 

@@ -1,10 +1,14 @@
+:root {
+    --clr-text-primary: white;
+}
+
 body,
 h1,
 h2,
 h3 {
     font-family: Arial;
     text-align: center;
-    color: var(--clr-app-text-primary);
+    color: var(--clr-text-primary);
 }
 
 header {
@@ -20,13 +24,13 @@ h3 {
 button {
     border-radius: 15px;
     border-style: none;
-    box-shadow: 0 0 5px 3px var(--clr-btn-box-shadow);
+    box-shadow: 0 0 5px 3px rgb(97, 218, 251);
     font-size: calc(5px + 1vw);
     padding: 0.5em;
 }
 
 #App {
-    background-color: var(--clr-app-background);
+    background-color: #282c34;
     min-height: 100vh;
 
     display: flex;
@@ -79,35 +83,4 @@ button {
     to {
         transform: rotate(360deg);
     }
-}
-
-#App .todo-section {
-    display: grid;
-    grid-template-rows: auto auto;
-    justify-content: center;
-    align-content: center;
-    gap: 2em;
-}
-
-#App .todos-list-container {
-    display: grid;
-    justify-content: center;
-    align-content: center;
-    gap: 1em;
-}
-
-#App .form-container {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    justify-content: center;
-    align-content: center;
-    gap: 1em;
-}
-
-#App .form-div {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    justify-content: center;
-    align-content: center;
-    gap: 1em;
 }

@@ -3,7 +3,7 @@ export const AppPackageName = {
         LOGGER: 'logger',
         REDUX: {
             ACTIONS: {
-                TODO: 'TodoActions'
+                COUNTER: 'CounterActions'
             },
             REDUCERS: 'reducers',
         },

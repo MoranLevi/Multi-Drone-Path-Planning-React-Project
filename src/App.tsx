@@ -1,59 +1,101 @@
-import React from 'react';
 import './App.css';
-import { useAppDispatch, useAppSelector } from './redux/hooks';
-import { TodoActions } from './redux/actions/TodoActions';
+import { useAppSelector } from './redux/hooks';
+import { CounterActions } from './redux/actions/CounterActions';
+import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-import TodoItem from './components/todo/TodoItem';
-import { AppText } from './constants/AppText';
-import { Configuration } from './constants/Configuration';
-
 
 function App() {
-    const dispatch = useAppDispatch();
+    const dispatch = useDispatch();
 
-    const { todos } = useAppSelector((state) => state.todo.ui);
+    const { count } = useAppSelector((state) => state.counter);
 
-    // Initialize App
-    useEffect(() => 
-    {
-        // Read data from somewhere
-        dispatch(TodoActions.addTodoItem('Clean the house'));
-        dispatch(TodoActions.addTodoItem('Prepare to Gym'));
-        dispatch(TodoActions.addTodoItem('Search how to center a <div>'));
+    useEffect(() => {
+        // const fileAppender = new ConsoleAppender();
+        // fileAppender.setLayout(new SimpleLayout());
+
+        // const logger1 = getLogger('redux');
+        // logger1.addAppender(fileAppender);
+
+        // const logger2 = getLogger('redux.actions');
+
+        // setTimeout(() => {
+        //     logger2.debug('Hey');
+        // }, 1000);
+
+        // logger.info('hey')
+        // const localStorageLogger1 = createLogg({
+        //   logName: 'utils',
+        //   maxLogSizeInBytes: 500 * 1024 // 500KB
+        // });
+
+        // const localStorageLogger2 = createLogg({
+        //   logName: 'home-page',
+        //   maxLogSizeInBytes: 500 * 1024 // 500KB
+        // });
+
+        // // Log something
+        // // debug | info | warn | error
+        // localStorageLogger1.info('something');
+        // localStorageLogger1.debug({ foo: 'bar' });
+
+        // localStorageLogger2.info('initializeee');
+        // localStorageLogger2.error({ isActive: true });
+
+        // // Export the log entries
+        // const logEntries = localStorageLogger1.exportToArray();
+        // console.warn();
+
+        // console.log(JSON.parse(localStorage.getItem('my-app-log-name') || ''));
     }, []);
 
-    const [todoItemBody, setTodoItemBody] = React.useState('');
-  
-    const onAddTodoItemButtonClick = () => {
-        if (!todoItemBody) 
-        return;
-
-        dispatch(TodoActions.addTodoItem(todoItemBody));
-        setTodoItemBody('');
-    };
-
-    const onRestoreFromTrashButtonClick = () => {
-        dispatch(TodoActions.restoreFromTrash())
-    }
-    
-      return (
+    return (
         <div id="App">
-            <h1>{AppText.homePage.todoListApp}</h1>
-            <section className='todo-section'>
-                <div className='form-container'>
-                    <input type="text" value={todoItemBody} onChange={e => setTodoItemBody(e.target.value)}/>
-                    <button onClick={onAddTodoItemButtonClick}>{AppText.homePage.addTodo}</button>
-                </div>
-                {Configuration.restoreFromTrashEnable && <button onClick={onRestoreFromTrashButtonClick}>{AppText.homePage.restoreFromTrash}</button>}
-                <div className='todos-list-container'>
-                    { todos.map((todo) => (
-                        <TodoItem
-                        key={todo.id}
-                        todoItem={todo}
-                        />
-                    ))}
+            <section id="info-section">
+                <header>
+                    A simple Website application build with {<br />}
+                </header>
+                <p id="info">
+                    <label>React</label>
+                    <label>JavaScript library for building user interfaces</label>
+
+                    <label>Redux</label>
+                    <label>Predictable State Container for JS Apps</label>
+
+                    <label>Typescript</label>
+                    <label>JavaScript with syntax for types</label>
+
+                    <label>Debug</label>
+                    <label>Debugging utility modelled after Node.js core's debugging technique</label>
+
+                    <label>Redux-logger</label>
+                    <label>Redux middleware to pipe action to primary logger</label>
+
+                    <label>Responsive design</label>
+                    <label>Web development approach that creates dynamic changes to the appearance of a website</label>
+                </p>
+            </section>
+            <section id="counter-section">
+                <h1>Count: {count}</h1>
+                <div className="counter-buttons-container">
+                <button
+                        onClick={() => dispatch(CounterActions.decreaseCounter())}
+                    >
+                        Decrease Count
+                    </button>
+                    <button
+                        onClick={() => dispatch(CounterActions.increaseCounter())}
+                    >
+                        Increase Count
+                    </button>
                 </div>
             </section>
+            <div className="react-logo-container">
+                <img
+                    className="react-logo"
+                    src="react-logo.svg"
+                    alt="React logo"
+                />
+            </div>
         </div>
     );
 }
