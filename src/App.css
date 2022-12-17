@@ -1,0 +1,113 @@
+body,
+h1,
+h2,
+h3 {
+    font-family: Arial;
+    text-align: center;
+    color: var(--clr-app-text-primary);
+}
+
+header {
+    font-size: calc(15px + 1.5vw);
+}
+
+h1,
+h2,
+h3 {
+    font-size: calc(5px + 1vw);
+}
+
+button {
+    border-radius: 15px;
+    border-style: none;
+    box-shadow: 0 0 5px 3px var(--clr-btn-box-shadow);
+    font-size: calc(5px + 1vw);
+    padding: 0.5em;
+}
+
+#App {
+    background-color: var(--clr-app-background);
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    gap: calc(5px + 1vw);
+    padding: 3vh;
+}
+
+#counter-section {
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    gap: calc(5px + 1vw);
+}
+
+#info-section {
+    display: grid;
+    justify-content: center;
+}
+
+#info {
+    text-align: left;
+    font-size: calc(10px + .8vw);
+    
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 1em;
+}
+
+.counter-buttons-container {
+    display: flex;
+    gap: 1em;
+}
+
+.react-logo-container {
+    display: flex;
+    justify-content: center;
+}
+
+.react-logo {
+    height: calc(10px + 15vh);
+    pointer-events: none;
+    animation: spin infinite 20s linear;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+#App .todo-section {
+    display: grid;
+    grid-template-rows: auto auto;
+    justify-content: center;
+    align-content: center;
+    gap: 2em;
+}
+
+#App .todos-list-container {
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    gap: 1em;
+}
+
+#App .form-container {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    justify-content: center;
+    align-content: center;
+    gap: 1em;
+}
+
+#App .form-div {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    justify-content: center;
+    align-content: center;
+    gap: 1em;
+}

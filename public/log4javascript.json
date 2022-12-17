@@ -1,0 +1,16 @@
+{
+    "loggers": [
+        {
+            "namePrefix": "dev",
+            "rootLevel": "DEBUG",
+            "defaultLayout": "SimpleLayout",
+            "appenders": []
+        },
+        {
+            "namePrefix": "prod",
+            "rootLevel": "DEBUG",
+            "defaultLayout": "SimpleLayout",
+            "appenders": []
+        }
+    ]
+}
