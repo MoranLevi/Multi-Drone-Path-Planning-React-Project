@@ -37,19 +37,26 @@ const InsertData: FC = () => {
     return (
         <div id='InsertData'>
             <div className='upload-target-locations-container'>
-                <h1 className='title-text'>Upload target locations</h1>
+                <div className='main-title-container'>
+                    <label className='required-asterisk'>*</label>
+                    <h1 className='title-text'>Upload target locations</h1>
+                </div>        
                 <div className='upload-file-container'>
                     <label className='upload-file-text'>Upload file:</label>
                     <div>hello</div>
                 </div>
             </div>
             <div className='numbers-of-drones-container'>
-                <h1 className='title-text'>Select one of the options</h1>
+                <div className='main-title-container'>
+                    <label className='required-asterisk'>*</label>
+                    <h1 className='title-text'>Select one of the options</h1>
+                </div>
                 <div className='option-radio-row-container'>
                     <input type='radio' name='radio-btn' value='radio1' checked={isRadioSelected('radio1')} onChange={handleRadioClick}/>
                     <label className='radio-btn-text'>Number of drones in known</label>
                     {selectedRadioBtn === 'radio1' && 
                         <div className='insert-numbers-of-drones-container'>
+                            <label className='required-asterisk'>*</label>
                             <label className='insert-number-of-drones-text'>Number of drones:</label>
                             <input type="text" className='insert-number-of-drones-input' value={localNumberOfDrones} onChange={event => setLocalNumberOfDrones(event.target.value)}></input>
                         </div>}
