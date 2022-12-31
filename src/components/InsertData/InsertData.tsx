@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { FC, useState } from 'react';
 import { useNavigate  } from 'react-router-dom';
 import { UIActions } from 'src/redux/actions/UIActions';
 import { useAppDispatch } from 'src/redux/hooks';
 import * as Yup from 'yup';
+import classNames from 'classnames';
 import './InsertData.css';
 
 const InsertData: FC = () => {
@@ -11,9 +12,16 @@ const InsertData: FC = () => {
     const dispatch = useAppDispatch();
     
     const navigate = useNavigate();
-
+    const fileInput = useRef<any>(null); // change type any to the correct type
+    
     const [selectedRadioBtn, setSelectedRadioBtn] = useState<string>('radio2');
     const [localNumberOfDrones, setLocalNumberOfDrones] = useState('');
+    const [isUploadFile, setIsUploadFile] = useState<boolean>(false);
+    const [uploadFile, setUploadFile] = useState<File | null>(null);
+
+    const uploadFileButtonClassName = classNames('button-upload-file', {
+        'button-upload-file-succeeded': isUploadFile,
+    })
 
     const isRadioSelected = (radioBtnName: string): boolean => {
         return (selectedRadioBtn === radioBtnName);
@@ -26,13 +34,46 @@ const InsertData: FC = () => {
     const handleClickContinueButton = () => {
         if(selectedRadioBtn === 'radio1') { //number of drones is known
             dispatch(UIActions.updateNumberOfDrones(Number(localNumberOfDrones)))
-            // navigate('/compareDrones');
+            navigate('/compareNumberOfDrones');
             return;
         }
+
         // number of drones is unknown
         dispatch(UIActions.updateNumberOfDrones(-1)) // -1 means that the number of drones is unknown
-        // navigate('/results')
+        navigate('/results')
     };
+
+    const handleFileChange = (event: any) => { //change any type to the correct type
+        const file = event.target.files[0];
+
+        if(file) {
+            setIsUploadFile(true);
+            setUploadFile(file);
+        }
+    
+        // if (file) {
+        //   const reader = new FileReader();
+        //   reader.onload = () => {
+        //     const data = new FormData();
+        //     data.append('file', file);
+        //     data.append('fileName', file.name);
+    
+        //     // Send the file to the server using an HTTP library like Axios
+        //     axios.post('/upload', data).then(response => {
+        //       console.log(response);
+        //     });
+        //   };
+        //   reader.readAsArrayBuffer(file);
+        // }
+      };
+
+    const handleChooseFileClick = () => {
+        if (fileInput.current) {
+            fileInput.current.click();
+        } else {
+          console.log('File input not yet rendered');
+        }
+      };
 
     return (
         <div id='InsertData'>
@@ -43,7 +84,13 @@ const InsertData: FC = () => {
                 </div>        
                 <div className='upload-file-container'>
                     <label className='upload-file-text'>Upload file:</label>
-                    <div>hello</div>
+                    <form>
+                        <input type="file" accept='.txt' ref={fileInput} onChange={handleFileChange} className='disapper-file-upload'/>
+                        <button type="button" onClick={handleChooseFileClick} className={uploadFileButtonClassName}>
+                            Choose File
+                        </button>
+                    </form>
+                    <label className='upload-file-name-text'>{uploadFile ? uploadFile.name : ''}</label>
                 </div>
             </div>
             <div className='numbers-of-drones-container'>

@@ -7,6 +7,8 @@ import React from 'react';
 import background from "./images/background.jpeg";
 import Home from './components/Home/Home';
 import InsertData from './components/InsertData/InsertData';
+import CompareNumberOfDrones from './components/CompareNumberOfDrones/CompareNumberOfDrones';
+import Results from './components/Results/Results';
 
 function App() {
     const dispatch = useDispatch();
@@ -63,7 +65,8 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Home />}/>
                     <Route path="/insertData" element={<InsertData />}/>
-                    {/* <Route path='/compareDrones' element={<CompareDrones />}/> */}
+                    <Route path='/compareNumberOfDrones' element={<CompareNumberOfDrones />}/>
+                    <Route path='/results' element={<Results />}/>
                 </Routes> 
             </Router>  
         </div>
