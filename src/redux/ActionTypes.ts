@@ -1,3 +1,8 @@
+const DATA               = 'DATA';
+const UI                 = 'UI';
+
 export const ActionTypes = {
-    // SET_COUNTER: 'SET_COUNTER',
+    UI: {
+        UPDATE_NUMBER_OF_DRONES:    UI + '_UPDATE_NUMBER_OF_DRONES',
+    }
 };

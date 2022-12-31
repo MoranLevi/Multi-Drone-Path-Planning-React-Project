@@ -63,6 +63,7 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Home />}/>
                     <Route path="/insertData" element={<InsertData />}/>
+                    {/* <Route path='/compareDrones' element={<CompareDrones />}/> */}
                 </Routes> 
             </Router>  
         </div>
