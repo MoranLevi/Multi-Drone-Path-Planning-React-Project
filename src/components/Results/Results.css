@@ -5,6 +5,8 @@
     gap: 30px;
     justify-content: center;
     align-items: center;
+    height: 100%;
+    width: 100%;
 }
 
 #Results .title-text,
@@ -23,9 +25,14 @@
     gap: 10px;
     width: 100%;
     height: 100%;
+    min-height: 360px;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 #Results .drone-path-container {
+    width: 920px;
+    height: 100%;
     display: grid;
     grid-template-columns: 0.2fr 0.8fr;
     gap: 10px;
@@ -34,6 +41,7 @@
 .drone-path {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     justify-content: left;
     gap: 10px;
     width: 100%;
