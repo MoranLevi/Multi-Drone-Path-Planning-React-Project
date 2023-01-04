@@ -1,7 +1,10 @@
 import { combineReducers } from 'redux';
+import LayoutReducer from './ui/LayoutReducer';
 
 const rootReducer = combineReducers({
-    // counter: counterReducer,
+    ui: combineReducers({
+        layout: LayoutReducer,
+    }),
 });
 
 export default rootReducer;
