@@ -1,13 +1,29 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import React from 'react';
 import { useNavigate  } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from 'src/redux/hooks';
+import { UIActions } from 'src/redux/actions/UIActions';
 import './CompareNumberOfDrones.css';
-import { useAppSelector } from 'src/redux/hooks';
 
 const CompareNumberOfDrones: FC = () => {
 
+    const dispatch = useAppDispatch();
+    
+    const navigate = useNavigate();
+    
     const { numberOfDrones } = useAppSelector(state => state.ui.layout);
     
+    const [localNumberOfDrones, setLocalNumberOfDrones] = useState('');
+    
+    const handleClickContinueWithChangeButton = () => {
+        dispatch(UIActions.updateNumberOfDrones(Number(localNumberOfDrones)))
+        navigate('/results');
+    };
+
+    const handleClickContinueWithoutChangeButton = () => {
+        navigate('/results');
+    };
+
     return (
         <div id='CompareNumberOfDrones'>
             <div className='display-number-of-drones-selected-container'>
@@ -26,14 +42,14 @@ const CompareNumberOfDrones: FC = () => {
                 <div className='box-continue-with-change-number-of-drones'>
                     <div className='change-number-of-drones'>
                         <label className='change-text'>Change number of drones:</label>
-                        <input type="text" className='change-number-of-drones-input'></input>
+                        <input type="text" className='change-number-of-drones-input' value={localNumberOfDrones} onChange={event => setLocalNumberOfDrones(event.target.value)}></input>
                     </div>
                     <div>
-                        <button className='continue-button'>Continue</button>
+                        <button className='continue-button' onClick={handleClickContinueWithChangeButton}>Continue</button>
                     </div>
                 </div>
                 <div className='box-continue-without-change-number-of-drones'>
-                    <button className='continue-button'>Continue without changing the number</button>
+                    <button className='continue-button' onClick={handleClickContinueWithoutChangeButton}>Continue without changing the number</button>
                 </div>
             </div>
         </div>

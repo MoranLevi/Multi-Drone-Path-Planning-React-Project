@@ -1,0 +1,41 @@
+#Results {
+    padding-top: 35vh;
+    display: grid;
+    grid-template-rows: 0.2fr 0.8fr;
+    gap: 30px;
+    justify-content: center;
+    align-items: center;
+}
+
+#Results .title-text,
+#Results .number-text {
+    font-size: calc(5px + 1.7vw);
+    font-weight: bold;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding-bottom: 10px; 
+    text-shadow: 2px 2px 8px rgb(73, 73, 165);
+    text-align: start;
+}
+
+#Results .list-drones-path-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    height: 100%;
+}
+
+#Results .drone-path-container {
+    display: grid;
+    grid-template-columns: 0.2fr 0.8fr;
+    gap: 10px;
+}
+
+.drone-path {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    gap: 10px;
+    width: 100%;
+    height: 100%;
+}
