@@ -4,25 +4,24 @@
     padding-top: 35vh;
     display: grid;
     grid-template-rows: auto auto auto;
-    gap: 20px;
 }
 
-#CompareNumberOfDrones .display-number-of-drones-selected,
-#CompareNumberOfDrones .display-number-of-drones-optimal {
+#CompareNumberOfDrones .display-number-of-drones-selected-container,
+#CompareNumberOfDrones .display-number-of-drones-optimal-container {
     display: grid;
     grid-template-columns: 0.5fr 0.5fr;
     align-items: center;
     justify-items: left;
-    padding-left: 27vw;
+    padding-left: 30vw;
 }
 
-#CompareNumberOfDrones .display-number-of-drones-optimal .optimal-number-title-container {
+#CompareNumberOfDrones .display-number-of-drones-optimal-container .optimal-number-title-container {
     display: grid;
     grid-template-rows: repeat(2, 0.5fr);
 }
 
-#CompareNumberOfDrones .display-number-of-drones-selected .title-text,
-#CompareNumberOfDrones .display-number-of-drones-optimal .optimal-number-title-container .title-text {
+#CompareNumberOfDrones .display-number-of-drones-selected-container .title-text,
+#CompareNumberOfDrones .display-number-of-drones-optimal-container .optimal-number-title-container .title-text {
     font-size: calc(5px + 1.7vw);
     font-weight: bold;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -31,12 +30,12 @@
     text-align: start;
 }
 
-#CompareNumberOfDrones .display-number-of-drones-optimal .optimal-number-title-container .title-text {
+#CompareNumberOfDrones .display-number-of-drones-optimal-container .optimal-number-title-container .title-text {
     padding-bottom: 0px;
 }
 
-#CompareNumberOfDrones .display-number-of-drones-selected .number-text,
-#CompareNumberOfDrones .display-number-of-drones-optimal .number-text {
+#CompareNumberOfDrones .display-number-of-drones-selected-container .number-text,
+#CompareNumberOfDrones .display-number-of-drones-optimal-container .number-text {
     font-size: calc(5px + 3vw);
     font-weight: bold;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -44,9 +43,101 @@
     text-shadow: 2px 2px 8px rgb(73, 73, 165);
 }
 
-#CompareNumberOfDrones .display-number-of-drones-optimal .number-text {
+#CompareNumberOfDrones .display-number-of-drones-optimal-container .number-text {
     padding-bottom: 0px;
 }
+
+#CompareNumberOfDrones .continue-buttons-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-items: center;
+    align-items: center;
+    gap: 40px;
+    padding-top: 50px;
+    padding-left: 25vw;
+}
+
+#CompareNumberOfDrones .continue-buttons-container .box-continue-with-change-number-of-drones {
+    width: 350px;
+    height: 160px;
+    border: 3px dashed rgb(73, 73, 165);
+    display: grid;
+    grid-template-rows: 0.8fr 0.2fr;
+    gap: 20px;
+    padding: 10px;
+}
+
+#CompareNumberOfDrones .continue-buttons-container .box-continue-with-change-number-of-drones .change-number-of-drones {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 0.6fr 0.4fr;
+    align-items: center;
+    justify-items: center;
+}
+
+#CompareNumberOfDrones .continue-buttons-container .box-continue-with-change-number-of-drones .change-number-of-drones .change-text {
+    font-size: calc(5px + 1vw);
+    color: rgb(9, 9, 96);
+}
+
+#CompareNumberOfDrones .continue-buttons-container .box-continue-with-change-number-of-drones .change-number-of-drones .change-number-of-drones-input {
+    width: 70%;
+    height: 50%;
+    border: 1px solid rgb(9, 9, 96);
+    border-radius: 8px;
+}
+
+#CompareNumberOfDrones .continue-buttons-container .box-continue-without-change-number-of-drones {
+    width: 350px;
+    height: 160px;
+    border: 3px dashed rgb(73, 73, 165);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#CompareNumberOfDrones .continue-buttons-container .box-continue-with-change-number-of-drones .continue-button,
+#CompareNumberOfDrones .continue-buttons-container .box-continue-without-change-number-of-drones .continue-button {
+    width: 50%;
+    height: 100%;
+    background-color: #eaebee;
+    border-radius: 100px;
+    box-shadow: rgba(130, 141, 189, 0.2) 0 -25px 18px -14px inset,rgba(130, 141, 189, 0.15) 0 1px 2px,rgba(130, 141, 189, 0.15) 0 2px 4px,rgba(130, 141, 189, 0.15) 0 4px 8px,rgba(130, 141, 189, 0.15) 0 8px 16px,rgba(130, 141, 189, 0.15) 0 16px 32px;
+    color: rgb(86, 86, 242);
+    cursor: pointer;
+    display: inline-block;
+    font-family: CerebriSans-Regular,-apple-system,system-ui,Roboto,sans-serif;
+    padding: 7px 20px;
+    text-align: center;
+    text-decoration: none;
+    transition: all 250ms;
+    border: 0;
+    font-size: 19px;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+
+#CompareNumberOfDrones .continue-buttons-container .box-continue-with-change-number-of-drones .continue-button:hover,
+#CompareNumberOfDrones .continue-buttons-container .box-continue-without-change-number-of-drones .continue-button:hover {
+    box-shadow: rgba(130, 141, 189, 0.35) 0 -25px 18px -14px inset,rgba(130, 141, 189, 0.35) 0 1px 2px,rgba(130, 141, 189, 0.35) 0 2px 4px,rgba(130, 141, 189, 0.35) 0 4px 8px,rgba(130, 141, 189, 0.35) 0 8px 16px,rgba(130, 141, 189, 0.35) 0 16px 32px;
+    transform: scale(1.05);
+}
+
+#CompareNumberOfDrones .continue-buttons-container .box-continue-with-change-number-of-drones .continue-button {
+    width: 50%;
+    height: 100%;
+}
+
+#CompareNumberOfDrones .continue-buttons-container .box-continue-without-change-number-of-drones .continue-button {
+    width: 70%;
+    height: 55%;
+}
+
+
 
 
 
