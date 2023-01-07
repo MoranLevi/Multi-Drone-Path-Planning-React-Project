@@ -3,7 +3,6 @@ import { FC, useState } from 'react';
 import { useNavigate  } from 'react-router-dom';
 import { UIActions } from 'src/redux/actions/UIActions';
 import { useAppDispatch } from 'src/redux/hooks';
-import * as Yup from 'yup';
 import classNames from 'classnames';
 import './InsertData.css';
 
@@ -15,9 +14,10 @@ const InsertData: FC = () => {
     const fileInput = useRef<any>(null); // change type any to the correct type
     
     const [selectedRadioBtn, setSelectedRadioBtn] = useState<string>('radio2');
-    const [localNumberOfDrones, setLocalNumberOfDrones] = useState('');
+    const [localNumberOfDrones, setLocalNumberOfDrones] = useState<string>('');
     const [isUploadFile, setIsUploadFile] = useState<boolean>(false);
     const [uploadFile, setUploadFile] = useState<File | null>(null);
+    const [numberOfDronesError, setNumberOfDronesError] = useState<string | undefined>(undefined);
 
     const uploadFileButtonClassName = classNames('button-upload-file', {
         'button-upload-file-succeeded': isUploadFile,
@@ -29,6 +29,13 @@ const InsertData: FC = () => {
 
     const handleRadioClick = (event: React.ChangeEvent<HTMLInputElement>): void => {
         setSelectedRadioBtn(event.currentTarget.value); // save the value of selected radio button
+        setLocalNumberOfDrones(''); // reset the number of drones
+        if(event.currentTarget.value === 'radio1') { // the first time the user clicks on the radio button
+            setNumberOfDronesError('');
+        } 
+        else {
+            setNumberOfDronesError(undefined);
+        }
     }
 
     const handleClickContinueButton = () => {
@@ -75,6 +82,39 @@ const InsertData: FC = () => {
         }
       };
 
+    const disableContinueButton = (): boolean => {
+        if(uploadFile === null) {
+            return true;
+        }
+        if(selectedRadioBtn === 'radio1' && numberOfDronesError !== undefined) {
+            return true;
+        }
+        return false;
+    };
+
+    const onChangeNumberOfDrones = (event: React.ChangeEvent<HTMLInputElement>): void => {
+        setLocalNumberOfDrones(event.target.value);
+        const numberOfDrones = Number(event.target.value);
+    
+        if(numberOfDrones === 0) {
+            setNumberOfDronesError('Required');
+            return;
+        }
+        if(Number.isNaN(numberOfDrones)) {
+            setNumberOfDronesError('Must be a number');
+            return;
+        }
+        if(numberOfDrones < 0 ) {
+            setNumberOfDronesError('Must be a positive number');
+            return;
+        }
+        if(Number.isInteger(numberOfDrones) === false) {
+            setNumberOfDronesError('Must be an integer number');
+            return;
+        }
+        setNumberOfDronesError(undefined);
+    };
+
     return (
         <div id='InsertData'>
             <div className='upload-target-locations-container'>
@@ -105,7 +145,9 @@ const InsertData: FC = () => {
                         <div className='insert-numbers-of-drones-container'>
                             <label className='required-asterisk'>*</label>
                             <label className='insert-number-of-drones-text'>Number of drones:</label>
-                            <input type="text" className='insert-number-of-drones-input' value={localNumberOfDrones} onChange={event => setLocalNumberOfDrones(event.target.value)}></input>
+                            {/* <input type="text" className='insert-number-of-drones-input' value={localNumberOfDrones} onChange={event => setLocalNumberOfDrones(event.target.value)}></input> */}
+                            <input type="text" className='insert-number-of-drones-input' value={localNumberOfDrones} onChange={onChangeNumberOfDrones}></input>
+                            <span className='error-msg'>{numberOfDronesError}</span>
                         </div>}
                 </div>
                 <div className='option-radio-row-container'>
@@ -114,7 +156,7 @@ const InsertData: FC = () => {
                 </div>   
             </div>
             <div className='continue-button-container'>
-                <button className='continue-button' onClick={handleClickContinueButton}>Continue</button>
+                <button className='continue-button' onClick={handleClickContinueButton} disabled={disableContinueButton()}>Continue</button>
             </div>
         </div>
     );
