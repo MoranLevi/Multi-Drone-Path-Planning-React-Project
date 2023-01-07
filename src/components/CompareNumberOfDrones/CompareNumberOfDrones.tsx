@@ -13,15 +13,49 @@ const CompareNumberOfDrones: FC = () => {
     
     const { numberOfDrones } = useAppSelector(state => state.ui.layout);
     
-    const [localNumberOfDrones, setLocalNumberOfDrones] = useState('');
-    
+    const [localNumberOfDrones, setLocalNumberOfDrones] = useState<string>('');
+    const [numberOfDronesError, setNumberOfDronesError] = useState<string | undefined>(undefined);
+
     const handleClickContinueWithChangeButton = () => {
+        if(numberOfDronesError !== undefined) {
+            return;
+        }
         dispatch(UIActions.updateNumberOfDrones(Number(localNumberOfDrones)))
         navigate('/results');
     };
 
     const handleClickContinueWithoutChangeButton = () => {
         navigate('/results');
+    };
+
+    const disableContinueWithChangeButton = (): boolean => {
+        if(localNumberOfDrones === '' || numberOfDronesError !== undefined) {
+            return true;
+        }
+        return false;
+    };
+
+    const onChangeNumberOfDrones = (event: React.ChangeEvent<HTMLInputElement>): void => {
+        setLocalNumberOfDrones(event.target.value);
+
+        const numberOfDrones = Number(event.target.value);
+        if(numberOfDrones === 0) {
+            setNumberOfDronesError('Required');
+            return;
+        }
+        if(Number.isNaN(numberOfDrones)) {
+            setNumberOfDronesError('Must be a number');
+            return;
+        }
+        if(numberOfDrones < 0 ) {
+            setNumberOfDronesError('Must be a positive number');
+            return;
+        }
+        if(Number.isInteger(numberOfDrones) === false) {
+            setNumberOfDronesError('Must be an integer number');
+            return;
+        }
+        setNumberOfDronesError(undefined);
     };
 
     return (
@@ -42,10 +76,11 @@ const CompareNumberOfDrones: FC = () => {
                 <div className='box-continue-with-change-number-of-drones'>
                     <div className='change-number-of-drones'>
                         <label className='change-text'>Change number of drones:</label>
-                        <input type="text" className='change-number-of-drones-input' value={localNumberOfDrones} onChange={event => setLocalNumberOfDrones(event.target.value)}></input>
+                        <input type="text" className='change-number-of-drones-input' value={localNumberOfDrones} onChange={onChangeNumberOfDrones}></input>
+                        <span className='error-msg'>{numberOfDronesError}</span>
                     </div>
                     <div>
-                        <button className='continue-button' onClick={handleClickContinueWithChangeButton}>Continue</button>
+                        <button className='continue-button' onClick={handleClickContinueWithChangeButton} disabled={disableContinueWithChangeButton()}>Continue</button>
                     </div>
                 </div>
                 <div className='box-continue-without-change-number-of-drones'>

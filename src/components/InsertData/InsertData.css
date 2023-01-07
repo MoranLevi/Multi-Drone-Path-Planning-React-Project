@@ -17,10 +17,6 @@
     padding-top: 10px;
 }
 
-#InsertData .error-msg {
-    color: red;
-}
-
 #InsertData .upload-target-locations-container {
     width: 100%;
     height: 100%;
@@ -172,8 +168,6 @@
 }
 
 #InsertData .continue-button-container .continue-button:disabled {
-    /* background:  #fff;
-    color: #ccc; */
     opacity: 0.6;
     cursor: no-drop;
 }

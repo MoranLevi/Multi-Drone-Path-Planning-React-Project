@@ -74,3 +74,7 @@ select {
         scroll-behavior: auto !important;
     }
 }
+
+.error-msg {
+    color: red;
+}
