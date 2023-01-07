@@ -62,8 +62,7 @@ const CompareNumberOfDrones: FC = () => {
         <div id='CompareNumberOfDrones'>
             <div className='display-number-of-drones-selected-container'>
                 <h1 className='title-text'>The number of drones you selected:</h1>
-                <label className='number-text'>{5}</label>
-                {/* <label className='number-text'>{numberOfDrones}</label> */}
+                <label className='number-text'>{numberOfDrones}</label>
             </div>
             <div className='display-number-of-drones-optimal-container'>
                 <div className='optimal-number-title-container'>
