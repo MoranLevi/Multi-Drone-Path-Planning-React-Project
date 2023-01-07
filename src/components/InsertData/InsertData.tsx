@@ -147,8 +147,9 @@ const InsertData: FC = () => {
                             <label className='insert-number-of-drones-text'>Number of drones:</label>
                             {/* <input type="text" className='insert-number-of-drones-input' value={localNumberOfDrones} onChange={event => setLocalNumberOfDrones(event.target.value)}></input> */}
                             <input type="text" className='insert-number-of-drones-input' value={localNumberOfDrones} onChange={onChangeNumberOfDrones}></input>
-                            <span className='error-msg'>{numberOfDronesError}</span>
                         </div>}
+                    {selectedRadioBtn === 'radio1' && 
+                        <span className='error-msg'>{numberOfDronesError}</span>}
                 </div>
                 <div className='option-radio-row-container'>
                     <input type='radio' name='radio-btn' value='radio2' checked={isRadioSelected('radio2')} onChange={handleRadioClick}/>

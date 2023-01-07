@@ -120,11 +120,10 @@
 }
 
 #InsertData .numbers-of-drones-container .option-radio-row-container .insert-numbers-of-drones-container {
-    padding-left: 5vw;
     display: flex;
     flex-direction: row;
     gap: 10px;
-    justify-content: center;
+    justify-content: right;
     align-items: center;
 }
 
