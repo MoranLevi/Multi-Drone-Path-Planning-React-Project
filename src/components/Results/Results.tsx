@@ -13,7 +13,7 @@ const Results: FC = () => {
     
     // number of drones is unknown
     const {data: optimalData, isLoading: isOptimalLoading, isError: isErrorLoading} = useQuery('optimal-targets-classification',() => {
-        return axios.get(`http://localhost:3004/optimal-targets-classification`, { params: { targetsFile } })
+        return axios.get(`http://localhost:8000/optimal-targets-classification`, { params: { targetsFile } })
     }, {
         refetchInterval: 5000,
         enabled: numberOfDrones === -1,
@@ -24,7 +24,7 @@ const Results: FC = () => {
 
     // number of drones is known
     const {data: requiredData, isLoading: isRequiredLoading, isError: isRequiredError} = useQuery('required-targets-classification',() => {
-        return axios.get(`http://localhost:3004/required-targets-classification`, { params: { targetsFile, numberOfDrones } })
+        return axios.get(`http://localhost:8000/required-targets-classification`, { params: { targetsFile, numberOfDrones } })
     }, {
         refetchInterval: 5000,
         enabled: numberOfDrones !== -1,

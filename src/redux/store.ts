@@ -6,8 +6,13 @@ import rootReducer from './reducers';
 // that adds good defaults to the store setup for a better development experience.
 export const store = configureStore({ 
     reducer: rootReducer,
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(reduxLogger),
-    devTools: false
+    // middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(reduxLogger),
+    devTools: false,
+    middleware: getDefaultMiddleware =>
+    getDefaultMiddleware({
+        immutableCheck: false,
+        serializableCheck: false,
+    }),
 });
 
 // The store has been created with these options:

@@ -9,6 +9,9 @@ import Home from './components/Home/Home';
 import InsertData from './components/InsertData/InsertData';
 import CompareNumberOfDrones from './components/CompareNumberOfDrones/CompareNumberOfDrones';
 import Results from './components/Results/Results';
+import { QueryClient, QueryClientProvider } from 'react-query';
+
+const queryClient = new QueryClient();
 
 function App() {
     const dispatch = useDispatch();
@@ -55,21 +58,23 @@ function App() {
     }, []);
 
     return (
-        <div id="App" style={{
-            backgroundImage:`url(${background})`,
-            minHeight: "100vh",
-            backgroundSize: "cover"
-            }}>
+        <QueryClientProvider client={queryClient}>
+            <div id="App" style={{
+                backgroundImage:`url(${background})`,
+                minHeight: "100vh",
+                backgroundSize: "cover"
+                }}>
             
-            <Router>
-                <Routes>
-                    <Route path="/" element={<Home />}/>
-                    <Route path="/insertData" element={<InsertData />}/>
-                    <Route path='/compareNumberOfDrones' element={<CompareNumberOfDrones />}/>
-                    <Route path='/results' element={<Results />}/>
-                </Routes> 
-            </Router>  
-        </div>
+                <Router>
+                    <Routes>
+                        <Route path="/" element={<Home />}/>
+                        <Route path="/insertData" element={<InsertData />}/>
+                        <Route path='/compareNumberOfDrones' element={<CompareNumberOfDrones />}/>
+                        <Route path='/results' element={<Results />}/>
+                    </Routes> 
+                </Router>  
+            </div>
+        </QueryClientProvider>
     );
 }
 
