@@ -5,6 +5,8 @@ import { UIActions } from 'src/redux/actions/UIActions';
 import { useAppDispatch } from 'src/redux/hooks';
 import classNames from 'classnames';
 import './InsertData.css';
+import { useMutation } from 'react-query';
+import axios from 'axios';
 
 const InsertData: FC = () => {
 
@@ -19,6 +21,12 @@ const InsertData: FC = () => {
     const [uploadFile, setUploadFile] = useState<File | undefined>(undefined);
     const [numberOfDronesError, setNumberOfDronesError] = useState<string | undefined>(undefined);
 
+    const mutationNumberOfDronesData = useMutation<any, any, any, any>({
+        mutationFn: newNumberOfDronesData => {
+            return axios.post(`http://localhost:8000/numberOfDronesData`, newNumberOfDronesData);
+        }
+    })
+    
     const uploadFileButtonClassName = classNames('button-upload-file', {
         'button-upload-file-succeeded': isUploadFile,
     })
@@ -42,6 +50,7 @@ const InsertData: FC = () => {
         dispatch(UIActions.updateTargetsFile(uploadFile))
         
         if(selectedRadioBtn === 'radio1') { //number of drones is known
+            mutationNumberOfDronesData.mutate({ numberOfDrones: localNumberOfDrones })
             dispatch(UIActions.updateNumberOfDrones(Number(localNumberOfDrones)))
             navigate('/compareNumberOfDrones');
             return;

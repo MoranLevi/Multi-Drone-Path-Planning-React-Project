@@ -20,16 +20,17 @@ const CompareNumberOfDrones: FC = () => {
 
     // optimal number of drones
     const {data: optimalData, isLoading: isOptimalLoading, isError: isErrorLoading} = useQuery('optimal-targets-classification',() => {
-        // return axios.get(`http://localhost:8000/optimal-targets-classification`, { params: { targetsFile } })
+        // return axios.get(`http://localhost:8000/optimal-targets-classification`, { params: { numberOfDrones } })
         return axios.get(`http://localhost:8000/optimal-targets-classification`)
     }, {
         refetchInterval: 5000,
         onError: () => {
             console.error("fetch error")
         },
+        onSuccess: (data) => {
+            console.log("fetch success", data)
+        }
     })
-
-    console.warn("optimalData", optimalData)
     
     const handleClickContinueWithChangeButton = () => {
         if(numberOfDronesError !== undefined) {
