@@ -13,4 +13,13 @@ export const UIActions = {
             payload:  { numberOfDrones: newNumberOfDrones }
         });
     },
+    updateTargetsFile: (newTargetsFile: File | undefined): AppThunk => (dispatch, getState) => {
+        const LOG = LoggerFactory.getLogger(AppPackageName.SRC.REDUX.ACTIONS.UI_ACTIONS);
+        LOG.debug('updateTargetsFile');
+
+        dispatch({
+            type:  ActionTypes.UI.UPDATE_TARGETS_FILE,
+            payload:  { targetsFile: newTargetsFile }
+        });
+    },
 };

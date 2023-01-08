@@ -3,6 +3,7 @@ import React from 'react';
 import { useNavigate  } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from 'src/redux/hooks';
 import { UIActions } from 'src/redux/actions/UIActions';
+import axios from 'axios';
 import './CompareNumberOfDrones.css';
 
 const CompareNumberOfDrones: FC = () => {
@@ -11,11 +12,21 @@ const CompareNumberOfDrones: FC = () => {
     
     const navigate = useNavigate();
     
-    const { numberOfDrones } = useAppSelector(state => state.ui.layout);
+    const { numberOfDrones, targetsFile } = useAppSelector(state => state.ui.layout);
     
     const [localNumberOfDrones, setLocalNumberOfDrones] = useState<string>('');
     const [numberOfDronesError, setNumberOfDronesError] = useState<string | undefined>(undefined);
 
+    // optimal number of drones
+    const {data: optimalData, isLoading: isOptimalLoading, isError: isErrorLoading} = useQuery('optimal-targets-classification',() => {
+        return axios.get(`http://localhost:3004/optimal-targets-classification`, { params: { targetsFile } })
+    }, {
+        refetchInterval: 5000,
+        onError: () => {
+            console.error("fetch error")
+        },
+    })
+    
     const handleClickContinueWithChangeButton = () => {
         if(numberOfDronesError !== undefined) {
             return;
@@ -91,3 +102,7 @@ const CompareNumberOfDrones: FC = () => {
 };
 
 export default CompareNumberOfDrones;
+
+function useQuery(arg0: string, arg1: () => any, arg2: { refetchInterval: number; onError: () => void; }): { data: any; isLoading: any; isError: any; } {
+    throw new Error('Function not implemented.');
+}

@@ -16,7 +16,7 @@ const InsertData: FC = () => {
     const [selectedRadioBtn, setSelectedRadioBtn] = useState<string>('radio2');
     const [localNumberOfDrones, setLocalNumberOfDrones] = useState<string>('');
     const [isUploadFile, setIsUploadFile] = useState<boolean>(false);
-    const [uploadFile, setUploadFile] = useState<File | null>(null);
+    const [uploadFile, setUploadFile] = useState<File | undefined>(undefined);
     const [numberOfDronesError, setNumberOfDronesError] = useState<string | undefined>(undefined);
 
     const uploadFileButtonClassName = classNames('button-upload-file', {
@@ -39,6 +39,8 @@ const InsertData: FC = () => {
     }
 
     const handleClickContinueButton = () => {
+        dispatch(UIActions.updateTargetsFile(uploadFile))
+        
         if(selectedRadioBtn === 'radio1') { //number of drones is known
             dispatch(UIActions.updateNumberOfDrones(Number(localNumberOfDrones)))
             navigate('/compareNumberOfDrones');
@@ -83,7 +85,7 @@ const InsertData: FC = () => {
       };
 
     const disableContinueButton = (): boolean => {
-        if(uploadFile === null) {
+        if(uploadFile === undefined) {
             return true;
         }
         if(selectedRadioBtn === 'radio1' && numberOfDronesError !== undefined) {
