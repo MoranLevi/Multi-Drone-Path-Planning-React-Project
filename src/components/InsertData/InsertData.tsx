@@ -26,6 +26,12 @@ const InsertData: FC = () => {
             return axios.post(`http://localhost:8000/numberOfDronesData`, newNumberOfDronesData);
         }
     })
+
+    const mutationFileNameData = useMutation<any, any, any, any>({
+        mutationFn: newFileNameData => {
+            return axios.post(`http://localhost:8000/fileNameData`, newFileNameData);
+        }
+    })
     
     const uploadFileButtonClassName = classNames('button-upload-file', {
         'button-upload-file-succeeded': isUploadFile,
@@ -48,7 +54,10 @@ const InsertData: FC = () => {
 
     const handleClickContinueButton = () => {
         dispatch(UIActions.updateTargetsFile(uploadFile))
-        
+        if(uploadFile !== undefined) {
+            mutationFileNameData.mutate({ fileName: uploadFile.name })
+        }
+
         if(selectedRadioBtn === 'radio1') { //number of drones is known
             mutationNumberOfDronesData.mutate({ numberOfDrones: localNumberOfDrones })
             dispatch(UIActions.updateNumberOfDrones(Number(localNumberOfDrones)))

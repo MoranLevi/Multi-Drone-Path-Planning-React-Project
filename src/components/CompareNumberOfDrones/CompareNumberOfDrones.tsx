@@ -3,7 +3,7 @@ import React from 'react';
 import { useNavigate  } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from 'src/redux/hooks';
 import { UIActions } from 'src/redux/actions/UIActions';
-import { useQuery } from 'react-query';
+import { useMutation, useQuery } from 'react-query';
 import axios from 'axios';
 import './CompareNumberOfDrones.css';
 
@@ -32,11 +32,18 @@ const CompareNumberOfDrones: FC = () => {
         }
     })
     
+    const mutationNumberOfDronesData = useMutation<any, any, any, any>({
+        mutationFn: newNumberOfDronesData => {
+            return axios.post(`http://localhost:8000/numberOfDronesData`, newNumberOfDronesData);
+        }
+    })
+    
     const handleClickContinueWithChangeButton = () => {
         if(numberOfDronesError !== undefined) {
             return;
         }
         dispatch(UIActions.updateNumberOfDrones(Number(localNumberOfDrones)))
+        mutationNumberOfDronesData.mutate({ numberOfDrones: localNumberOfDrones })
         navigate('/results');
     };
 
