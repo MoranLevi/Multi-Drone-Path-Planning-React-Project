@@ -3,7 +3,8 @@ import React from 'react';
 import { useNavigate  } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from 'src/redux/hooks';
 import { UIActions } from 'src/redux/actions/UIActions';
-import { useMutation, useQuery } from 'react-query';
+import { useQuery } from 'react-query';
+import { Spin } from 'antd';
 import axios from 'axios';
 import './CompareNumberOfDrones.css';
 
@@ -17,24 +18,25 @@ const CompareNumberOfDrones: FC = () => {
     
     const [localNumberOfDrones, setLocalNumberOfDrones] = useState<string>('');
     const [numberOfDronesError, setNumberOfDronesError] = useState<string | undefined>(undefined);
+    const [isOptimalNumberOfDronesData, setIsOptimalNumberOfDronesData] = useState<boolean>(false);
+
+    const fileName = targetsFile ? targetsFile.name : 'TSP100.txt';
 
     // optimal number of drones
-    const {data: optimalData, isLoading: isOptimalLoading, isError: isErrorLoading} = useQuery('optimal-targets-classification',() => {
-        // return axios.get(`http://localhost:8000/optimal-targets-classification`, { params: { numberOfDrones } })
-        return axios.get(`http://localhost:8000/optimal-targets-classification`)
+    const {data: optimalData, isLoading: isOptimalLoading, isError: isErrorLoading} = useQuery('optimal-targets-classification', async () => {
+        const response = await axios.get(`http://localhost:8000/optimal-targets-classification`, { params: { fileName } })
+        return response.data;
+        // console.log("fetching")
+        // return axios.get(`http://localhost:8000/optimal-targets-classification`)
     }, {
-        refetchInterval: 5000,
+        enabled: !isOptimalNumberOfDronesData,
         onError: () => {
             console.error("fetch error")
         },
         onSuccess: (data) => {
-            console.log("fetch success", data)
-        }
-    })
-    
-    const mutationNumberOfDronesData = useMutation<any, any, any, any>({
-        mutationFn: newNumberOfDronesData => {
-            return axios.post(`http://localhost:8000/numberOfDronesData`, newNumberOfDronesData);
+            // debugger
+            setIsOptimalNumberOfDronesData(true);
+            console.log("success")
         }
     })
     
@@ -43,7 +45,6 @@ const CompareNumberOfDrones: FC = () => {
             return;
         }
         dispatch(UIActions.updateNumberOfDrones(Number(localNumberOfDrones)))
-        mutationNumberOfDronesData.mutate({ numberOfDrones: localNumberOfDrones })
         navigate('/results');
     };
 
@@ -92,7 +93,7 @@ const CompareNumberOfDrones: FC = () => {
                     <h1 className='title-text'>The optimal number of drones the</h1>
                     <h1 className='title-text'>system has calculated:</h1>
                 </div>
-                <label className='number-text'>{4}</label>
+                <label className='number-text'>{isOptimalLoading ? <Spin/> : optimalData.length}</label>
             </div>
             <div className='continue-buttons-container'>
                 <div className='box-continue-with-change-number-of-drones'>

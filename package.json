@@ -10,6 +10,7 @@
         "@types/react": "^17.0.38",
         "@types/react-redux": "^7.1.22",
         "@types/redux-logger": "^3.0.9",
+        "antd": "^5.1.4",
         "axios": "^1.2.2",
         "classnames": "^2.3.2",
         "loglevel": "^1.8.0",

@@ -1,37 +1,60 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { useAppSelector } from 'src/redux/hooks';
 import { useQuery } from 'react-query';
+import { Spin } from 'antd';
 import React from 'react';
 import axios from 'axios';
 import './Results.css';
-
-
 
 const Results: FC = () => {
 
     const { numberOfDrones, targetsFile } = useAppSelector(state => state.ui.layout);
     
+    const [isOptimalNumberOfDronesData, setIsOptimalNumberOfDronesData]   = useState<boolean>(false);
+    const [isRequiredNumberOfDronesData, setIsRequiredNumberOfDronesData] = useState<boolean>(false);
+
+    const fileName = targetsFile ? targetsFile.name : 'TSP100.txt';
+
     // number of drones is unknown
-    const {data: optimalData, isLoading: isOptimalLoading, isError: isErrorLoading} = useQuery('optimal-targets-classification',() => {
-        return axios.get(`http://localhost:8000/optimal-targets-classification`, { params: { targetsFile } })
+    const {data: optimalData, isLoading: isOptimalLoading, isError: isErrorLoading} = useQuery('optimal-targets-classification', async () => {
+        const response = await axios.get(`http://localhost:8000/optimal-targets-classification`, { params: { fileName } })
+        return response.data;
+        // console.log("fetching")
+        // return axios.get(`http://localhost:8000/optimal-targets-classification`)
     }, {
-        refetchInterval: 5000,
-        enabled: numberOfDrones === -1,
+        enabled: !isOptimalNumberOfDronesData && numberOfDrones === -1,
         onError: () => {
             console.error("fetch error")
         },
+        onSuccess: (data) => {
+            setIsOptimalNumberOfDronesData(true);
+            console.log("success", data)
+        }
     })
 
     // number of drones is known
     const {data: requiredData, isLoading: isRequiredLoading, isError: isRequiredError} = useQuery('required-targets-classification',() => {
-        return axios.get(`http://localhost:8000/required-targets-classification`, { params: { targetsFile, numberOfDrones } })
+        return axios.get(`http://localhost:8000/required-targets-classification`, { params: { fileName, numberOfDrones } })
+        // return axios.get(`http://localhost:8000/required-targets-classification`)
     }, {
-        refetchInterval: 5000,
-        enabled: numberOfDrones !== -1,
+        enabled: !isRequiredNumberOfDronesData && numberOfDrones !== -1,
         onError: () => {
             console.error("fetch error")
         },
+        onSuccess: (data) => {
+            setIsRequiredNumberOfDronesData(true);
+            console.log("success", data)
+        }
     })
+
+    if (isOptimalLoading || isRequiredLoading) {
+        return (
+            <div className='loading-spinner'>
+                <Spin size="large" tip="Loading..."/>
+            </div>
+            
+        );
+    }
 
     const array = [[1,2,3,4,5,1,2,3,4,5,1,2,3,4,5,1,2,3,4,5,1,2,3,4,5,1,2,3,4,5,1,2,3,4,5], [6,7,8,9,10], [11,12,13,14,15], [16,17,18] ]
 
