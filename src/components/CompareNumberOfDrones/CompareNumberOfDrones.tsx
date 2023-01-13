@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from 'src/redux/hooks';
 import { UIActions } from 'src/redux/actions/UIActions';
 import { useQuery } from 'react-query';
 import { Spin } from 'antd';
+import { Configuration } from 'src/Configuration';
 import axios from 'axios';
 import './CompareNumberOfDrones.css';
 
@@ -24,17 +25,15 @@ const CompareNumberOfDrones: FC = () => {
 
     // optimal number of drones
     const {data: optimalData, isLoading: isOptimalLoading, isError: isErrorLoading} = useQuery('optimal-targets-classification', async () => {
-        const response = await axios.get(`http://localhost:8000/optimal-targets-classification`, { params: { fileName } })
+        // const response = await axios.get(`http://localhost:8000/optimal-targets-classification`, { params: { fileName } })
+        const response = await axios.get(`${Configuration.backend.url}:${Configuration.backend.port}/optimal-targets-classification`, { params: { fileName } })
         return response.data;
-        // console.log("fetching")
-        // return axios.get(`http://localhost:8000/optimal-targets-classification`)
     }, {
         enabled: !isOptimalNumberOfDronesData,
         onError: () => {
             console.error("fetch error")
         },
         onSuccess: (data) => {
-            // debugger
             setIsOptimalNumberOfDronesData(true);
             console.log("success")
         }

@@ -1,6 +1,7 @@
 import { FC, useState } from 'react';
 import { useAppSelector } from 'src/redux/hooks';
 import { useQuery } from 'react-query';
+import { Configuration } from 'src/Configuration';
 import { Spin } from 'antd';
 import React from 'react';
 import axios from 'axios';
@@ -17,10 +18,9 @@ const Results: FC = () => {
 
     // number of drones is unknown
     const {data: optimalData, isLoading: isOptimalLoading, isError: isErrorLoading} = useQuery('optimal-targets-classification', async () => {
-        const response = await axios.get(`http://localhost:8000/optimal-targets-classification`, { params: { fileName } })
+        // const response = await axios.get(`http://localhost:8000/optimal-targets-classification`, { params: { fileName } })
+        const response = await axios.get(`${Configuration.backend.url}:${Configuration.backend.port}/optimal-targets-classification`, { params: { fileName } })
         return response.data;
-        // console.log("fetching")
-        // return axios.get(`http://localhost:8000/optimal-targets-classification`)
     }, {
         enabled: !isOptimalNumberOfDronesData && numberOfDrones === -1,
         onError: () => {
@@ -33,9 +33,10 @@ const Results: FC = () => {
     })
 
     // number of drones is known
-    const {data: requiredData, isLoading: isRequiredLoading, isError: isRequiredError} = useQuery('required-targets-classification',() => {
-        return axios.get(`http://localhost:8000/required-targets-classification`, { params: { fileName, numberOfDrones } })
-        // return axios.get(`http://localhost:8000/required-targets-classification`)
+    const {data: requiredData, isLoading: isRequiredLoading, isError: isRequiredError} = useQuery('required-targets-classification', async () => {
+        // const response = await axios.get(`http://localhost:8000/required-targets-classification`, { params: { fileName, numberOfDrones } })
+        const response = await axios.get(`${Configuration.backend.url}:${Configuration.backend.port}/required-targets-classification`, { params: { fileName, numberOfDrones } })
+        return response.data;
     }, {
         enabled: !isRequiredNumberOfDronesData && numberOfDrones !== -1,
         onError: () => {

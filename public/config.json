@@ -1,0 +1,7 @@
+{
+    "backend": {
+      "url":                        "http://localhost",
+      "port":                       "8000"
+    }
+}
+  
