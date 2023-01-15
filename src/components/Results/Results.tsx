@@ -1,18 +1,21 @@
 import { FC, useState } from 'react';
-import { useAppSelector } from 'src/redux/hooks';
+import { useAppDispatch, useAppSelector } from 'src/redux/hooks';
 import { useQuery } from 'react-query';
 import { Configuration } from 'src/Configuration';
 import { Spin } from 'antd';
+import { UIActions } from 'src/redux/actions/UIActions';
 import React from 'react';
 import axios from 'axios';
 import './Results.css';
 
-const Results: FC = () => {
 
+const Results: FC = () => {
+    
     const { numberOfDrones, targetsFile } = useAppSelector(state => state.ui.layout);
     
     const [isOptimalNumberOfDronesData, setIsOptimalNumberOfDronesData]   = useState<boolean>(false);
     const [isRequiredNumberOfDronesData, setIsRequiredNumberOfDronesData] = useState<boolean>(false);
+    const [localNumberOfDrones, setLocalNumberOfDrones] = useState<number | undefined>(numberOfDrones);
 
     const fileName = targetsFile ? targetsFile.name : 'TSP100.txt';
 
@@ -28,6 +31,7 @@ const Results: FC = () => {
         },
         onSuccess: (data) => {
             setIsOptimalNumberOfDronesData(true);
+            setLocalNumberOfDrones(data.length);
             console.log("success", data)
         }
     })
@@ -57,13 +61,16 @@ const Results: FC = () => {
         );
     }
 
-    const array = [[1,2,3,4,5,1,2,3,4,5,1,2,3,4,5,1,2,3,4,5,1,2,3,4,5,1,2,3,4,5,1,2,3,4,5], [6,7,8,9,10], [11,12,13,14,15], [16,17,18] ]
+    // const array = [[1,2,3,4,5,1,2,3,4,5,1,2,3,4,5,1,2,3,4,5,1,2,3,4,5,1,2,3,4,5,1,2,3,4,5], [6,7,8,9,10], [11,12,13,14,15], [16,17,18] ]
+
+    const array = numberOfDrones === -1 ? optimalData : requiredData;
 
     const checkIfLastElement = (dataArray: number[], index: number) => {
         return index !== dataArray.length - 1;
     }
+    console.warn("hhh", array)
     const renderDronesPath = () => {
-        return array.map((arrayOfObjects, index) => {
+        return array.map((arrayOfObjects: any[], index: number) => {
             return (
                 <div className='drone-path-container'>
                     <h1 className='title-text'>{`Drone ${index + 1}:`}</h1>
@@ -83,7 +90,7 @@ const Results: FC = () => {
 
     return (
         <div id='Results'>
-            <h1 className='title-text'>{`The best paths the system has calculated for ${numberOfDrones} drones:`}</h1>
+            <h1 className='title-text'>{`The best paths the system has calculated for ${localNumberOfDrones} drones:`}</h1>
             <div className='list-drones-path-container'>
                 {renderDronesPath()}
             </div>
