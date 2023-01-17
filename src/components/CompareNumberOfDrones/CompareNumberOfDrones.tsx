@@ -89,8 +89,8 @@ const CompareNumberOfDrones: FC = () => {
             </div>
             <div className='display-number-of-drones-optimal-container'>
                 <div className='optimal-number-title-container'>
-                    <h1 className='title-text'>The optimal number of drones the</h1>
-                    <h1 className='title-text'>system has calculated:</h1>
+                    <h1 className='title-text'>The optimal number of drones </h1>
+                    <h1 className='title-text'>the system has calculated:</h1>
                 </div>
                 <label className='number-text'>{isOptimalLoading ? <Spin/> : optimalData.length}</label>
             </div>

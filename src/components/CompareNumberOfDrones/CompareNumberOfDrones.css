@@ -1,19 +1,21 @@
 #CompareNumberOfDrones {
     width: 100%;
     height: 100%;
-    padding-top: 30vh;
-    display: grid;
-    grid-template-rows: auto auto auto;
+    padding-top: 25vh;
+    /* display: grid; */
+    /* grid-template-rows: auto auto auto; */
+    /* grid-template-rows: auto auto auto; */
+    display: flex;
+    flex-direction: column;
 }
 
 #CompareNumberOfDrones .display-number-of-drones-selected-container,
 #CompareNumberOfDrones .display-number-of-drones-optimal-container {
     display: grid;
-    grid-template-columns: 0.5fr 0.5fr;
-    gap: 10px;
+    grid-template-columns: 0.55fr 0.45fr;
     align-items: center;
     justify-items: left;
-    padding-left: 30vw;
+    padding-left: 25vw;
 }
 
 #CompareNumberOfDrones .display-number-of-drones-optimal-container .optimal-number-title-container {
@@ -25,7 +27,7 @@
 #CompareNumberOfDrones .display-number-of-drones-optimal-container .optimal-number-title-container .title-text {
     font-size: calc(5px + 1.7vw);
     font-weight: bold;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Segoe UI Black', Tahoma, Geneva, Verdana, sans-serif;
     padding-bottom: 10px; 
     text-shadow: 2px 2px 8px rgb(73, 73, 165);
     text-align: start;
@@ -39,7 +41,7 @@
 #CompareNumberOfDrones .display-number-of-drones-optimal-container .number-text {
     font-size: calc(5px + 3vw);
     font-weight: bold;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Segoe UI Black', Tahoma, Geneva, Verdana, sans-serif;
     padding-bottom: 10px; 
     text-shadow: 2px 2px 8px rgb(73, 73, 165);
 }
@@ -56,7 +58,7 @@
     justify-items: center;
     align-items: center;
     gap: 40px;
-    padding-top: 50px;
+    /* padding-top: 50px; */
     padding-left: 19.5vw;
 }
 

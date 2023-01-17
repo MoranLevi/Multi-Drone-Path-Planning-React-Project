@@ -1,8 +1,8 @@
 #Home {
-    padding-top: 40vh;
+    padding-top: 35vh;
     display: grid;
     grid-template-rows: 0.7fr 0.3fr;
-    gap: 40px;
+    gap: 50px;
     justify-content: center;
     align-items: center;
 }
@@ -17,16 +17,17 @@
 #Home .main-title-container .main-title {
     font-size: calc(5px + 4vw);
     font-weight: bold;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    padding-bottom: 10px; 
-    text-shadow: 2px 2px 8px rgb(73, 73, 165);
+    font-family: 'Segoe UI Black', Tahoma, Geneva, Verdana, sans-serif;
+    text-shadow: 2px 2px 8px rgb(42, 42, 107);
 }
 
 #Home .start-button {
+  margin: 0px 100px;
+  height: 120%;
   background-color: #eaebee;
   border-radius: 100px;
   box-shadow: rgba(130, 141, 189, 0.2) 0 -25px 18px -14px inset,rgba(130, 141, 189, 0.15) 0 1px 2px,rgba(130, 141, 189, 0.15) 0 2px 4px,rgba(130, 141, 189, 0.15) 0 4px 8px,rgba(130, 141, 189, 0.15) 0 8px 16px,rgba(130, 141, 189, 0.15) 0 16px 32px;
-  color: rgb(86, 86, 242);
+  color: rgb(9, 9, 96);
   cursor: pointer;
   display: inline-block;
   font-family: CerebriSans-Regular,-apple-system,system-ui,Roboto,sans-serif;
@@ -35,13 +36,13 @@
   text-decoration: none;
   transition: all 250ms;
   border: 0;
-  font-size: 19px;
+  font-size: calc(5px + 1vw);
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
+  box-shadow: rgba(130, 141, 189, 0.35) 0 -25px 18px -14px inset,rgba(130, 141, 189, 0.35) 0 1px 2px,rgba(130, 141, 189, 0.35) 0 2px 4px,rgba(130, 141, 189, 0.35) 0 4px 8px,rgba(130, 141, 189, 0.35) 0 8px 16px,rgba(130, 141, 189, 0.35) 0 16px 32px;
 }
 
 #Home .start-button:hover {
-  box-shadow: rgba(130, 141, 189, 0.35) 0 -25px 18px -14px inset,rgba(130, 141, 189, 0.35) 0 1px 2px,rgba(130, 141, 189, 0.35) 0 2px 4px,rgba(130, 141, 189, 0.35) 0 4px 8px,rgba(130, 141, 189, 0.35) 0 8px 16px,rgba(130, 141, 189, 0.35) 0 16px 32px;
   transform: scale(1.05);
 }

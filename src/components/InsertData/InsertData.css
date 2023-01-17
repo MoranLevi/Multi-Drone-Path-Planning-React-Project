@@ -1,7 +1,7 @@
 #InsertData {
     width: 100%;
     height: 100%;
-    padding-top: 35vh;
+    padding-top: 25vh;
     padding-bottom: 10vh;
     display: grid;
     /* grid-template-rows: 0.3fr 0.4fr 0.15fr 0.35fr; */
@@ -22,14 +22,15 @@
     display: grid;
     grid-template-rows: repeat(2, 1fr);
     justify-items: left;
-    padding-left: 27vw;
+    /* padding-left: 27vw; */
+    padding-left: 34vw;
 }
 
 #InsertData .upload-target-locations-container .title-text,
 #InsertData .numbers-of-drones-container .title-text {
     font-size: calc(5px + 2vw);
     font-weight: bold;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Segoe UI Black', Tahoma, Geneva, Verdana, sans-serif;
     padding-bottom: 10px; 
     text-shadow: 2px 2px 8px rgb(73, 73, 165);
 }
@@ -56,8 +57,8 @@
     height: 100%; */
     background-color: #eaebee;
     border-radius: 22px;
-    box-shadow: rgba(130, 141, 189, 0.2) 0 -25px 18px -14px inset,rgba(130, 141, 189, 0.15) 0 1px 2px,rgba(130, 141, 189, 0.15) 0 2px 4px,rgba(130, 141, 189, 0.15) 0 4px 8px,rgba(130, 141, 189, 0.15) 0 8px 16px,rgba(130, 141, 189, 0.15) 0 16px 32px;
-    color: rgb(86, 86, 242);
+    box-shadow: rgba(118, 127, 171, 0.2) 0 -25px 18px -14px inset,rgba(130, 141, 189, 0.15) 0 1px 2px,rgba(130, 141, 189, 0.15) 0 2px 4px,rgba(130, 141, 189, 0.15) 0 4px 8px,rgba(130, 141, 189, 0.15) 0 8px 16px,rgba(130, 141, 189, 0.15) 0 16px 32px;
+    color: rgb(9, 9, 96);
     cursor: pointer;
     display: inline-block;
     font-family: CerebriSans-Regular,-apple-system,system-ui,Roboto,sans-serif;
@@ -66,7 +67,7 @@
     text-decoration: none;
     transition: all 250ms;
     border: 0;
-    font-size: 19px;
+    font-size: calc(5px + 1vw);
     user-select: none;
     -webkit-user-select: none;
     touch-action: manipulation;
@@ -97,7 +98,8 @@
     grid-template-rows: repeat(3, 1fr);
     justify-items: left;
     align-items: center;
-    padding-left: 27vw;
+    /* padding-left: 27vw; */
+    padding-left: 34vw;
 }
 
 #InsertData .upload-target-locations-container .main-title-container,
@@ -141,13 +143,13 @@
 }
 
 #InsertData .continue-button-container .continue-button {
-    width: 20%;
+    width: 12%;
     min-width: fit-content;
     /* height: 100%; */
     background-color: #eaebee;
     border-radius: 100px;
     box-shadow: rgba(130, 141, 189, 0.2) 0 -25px 18px -14px inset,rgba(130, 141, 189, 0.15) 0 1px 2px,rgba(130, 141, 189, 0.15) 0 2px 4px,rgba(130, 141, 189, 0.15) 0 4px 8px,rgba(130, 141, 189, 0.15) 0 8px 16px,rgba(130, 141, 189, 0.15) 0 16px 32px;
-    color: rgb(86, 86, 242);
+    color: rgb(9, 9, 96);
     cursor: pointer;
     display: inline-block;
     font-family: CerebriSans-Regular,-apple-system,system-ui,Roboto,sans-serif;
@@ -156,18 +158,22 @@
     text-decoration: none;
     transition: all 250ms;
     border: 0;
-    font-size: 19px;
+    font-size: calc(5px + 1vw);
     user-select: none;
     -webkit-user-select: none;
     touch-action: manipulation;
 }
 
 #InsertData .continue-button-container .continue-button:hover {
-    box-shadow: rgba(130, 141, 189, 0.35) 0 -25px 18px -14px inset,rgba(130, 141, 189, 0.35) 0 1px 2px,rgba(130, 141, 189, 0.35) 0 2px 4px,rgba(130, 141, 189, 0.35) 0 4px 8px,rgba(130, 141, 189, 0.35) 0 8px 16px,rgba(130, 141, 189, 0.35) 0 16px 32px;
     transform: scale(1.05);
 }
 
 #InsertData .continue-button-container .continue-button:disabled {
     opacity: 0.6;
     cursor: no-drop;
+}
+
+input[type='radio'] {
+    width: 3vw;
+    height: 3vh;
 }
