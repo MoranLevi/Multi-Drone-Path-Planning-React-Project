@@ -71,16 +71,17 @@ const Results: FC = () => {
         return array.map((arrayOfObjects: any[], index: number) => {
             return (
                 <div className='drone-path-container'>
-                    <h1 className='title-text'>{`Drone ${index + 1}:`}</h1>
+                    <h1 className='text-drone'>{`Drone ${index + 1}:`}</h1>
                     <div className='drone-path'>
                         {arrayOfObjects.map((object, index, row) => {
                             return (
                                 <div className='drone-path-object'>
-                                    <label className='number-text'>{object + (checkIfLastElement(arrayOfObjects, index) ? ' ->' : '')}</label>
+                                    <label className='number-text-drone'>{object + (checkIfLastElement(arrayOfObjects, index) ? ' ->' : '')}</label>
                                 </div>
                             )
                         })}
                     </div>
+                    <br/>
                 </div>
             )
         })

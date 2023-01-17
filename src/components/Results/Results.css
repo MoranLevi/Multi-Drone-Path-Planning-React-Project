@@ -1,5 +1,5 @@
 #Results {
-    padding-top: 35vh;
+    padding-top: 28vh;
     display: grid;
     grid-template-rows: 0.1fr 0.9fr;
     gap: 30px;
@@ -9,11 +9,20 @@
     width: 100%;
 }
 
-#Results .title-text,
-#Results .number-text {
+#Results .title-text {
     font-size: calc(5px + 1.7vw);
     font-weight: bold;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Segoe UI Black', Tahoma, Geneva, Verdana, sans-serif;
+    padding-bottom: 10px; 
+    text-shadow: 2px 2px 8px rgb(73, 73, 165);
+    text-align: start;
+}
+
+#Results .text-drone,
+#Results .number-text-drone {
+    font-size: calc(5px + 1.4vw);
+    font-weight: bold;
+    font-family: 'Segoe UI Black', Tahoma, Geneva, Verdana, sans-serif;
     padding-bottom: 10px; 
     text-shadow: 2px 2px 8px rgb(73, 73, 165);
     text-align: start;
