@@ -1,5 +1,5 @@
 #Home {
-    padding-top: 35vh;
+    padding-top: 40vh;
     display: grid;
     grid-template-rows: 0.7fr 0.3fr;
     gap: 40px;
@@ -16,13 +16,10 @@
 
 #Home .main-title-container .main-title {
     font-size: calc(5px + 4vw);
-    /* font-weight: bold; */
-    font-family: 'Segoe UI Black', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bold;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     padding-bottom: 10px; 
-    /* text-shadow: 2px 2px 8px rgb(73, 73, 165); */
-    text-shadow: 2px 2px 8px rgb(73, 73, 165), 2px 2px 10px rgb(73, 73, 165), 2px 2px 8px #2D9DFF;
-    /* color: #f4f1ff;  */
-    color: #f4f1ff;
+    text-shadow: 2px 2px 8px rgb(73, 73, 165);
 }
 
 #Home .start-button {
