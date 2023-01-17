@@ -89,7 +89,7 @@ const Results: FC = () => {
 
     return (
         <div id='Results'>
-            <h1 className='title-text'>{`The best paths the system has calculated for ${localNumberOfDrones} drones:`}</h1>
+            <h1 className='title-text'>{`The best paths calculated for ${localNumberOfDrones} drones:`}</h1>
             <div className='list-drones-path-container'>
                 {renderDronesPath()}
             </div>
