@@ -17,11 +17,12 @@ function App() {
     
     return (
         <QueryClientProvider client={queryClient}>
-            <div id="App" style={{
+            {/* <div id="App" style={{
                 backgroundImage:`url(${background})`,
                 minHeight: "100vh",
                 backgroundSize: "cover"
-                }}>
+                }}> */}
+            <div id="App" className='backgroundimg'>
             
                 <Router>
                     <Routes>

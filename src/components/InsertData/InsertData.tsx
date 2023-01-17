@@ -143,7 +143,7 @@ const InsertData: FC = () => {
                 </div>
                 <div className='option-radio-row-container'>
                     <input type='radio' name='radio-btn' value='radio1' checked={isRadioSelected('radio1')} onChange={handleRadioClick}/>
-                    <label className='radio-btn-text'>Number of drones in known</label>
+                    <label className='radio-btn-text'>Number of drones is known</label>
                     {selectedRadioBtn === 'radio1' && 
                         <div className='insert-numbers-of-drones-container'>
                             <label className='required-asterisk'>*</label>
@@ -156,7 +156,7 @@ const InsertData: FC = () => {
                 </div>
                 <div className='option-radio-row-container'>
                     <input type='radio' name='radio-btn' value='radio2' checked={isRadioSelected('radio2')} onChange={handleRadioClick}/>
-                    <label className='radio-btn-text'>Number of drones in unknown</label>
+                    <label className='radio-btn-text'>Number of drones is unknown</label>
                 </div>   
             </div>
             <div className='continue-button-container'>

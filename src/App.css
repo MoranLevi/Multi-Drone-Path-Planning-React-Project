@@ -32,9 +32,19 @@ button {
 #App {
     /* background-color: #282c34; */
     min-height: 100vh;
-
+    /* height: 100vh; */
     display: flex;
     flex-direction: column;
     gap: calc(5px + 1vw);
     /* padding: 3vh; */
+}
+
+.backgroundimg {
+    background-image: url(./images/background.jpeg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    
+    height: 100vh;
+    width: 100%;
 }

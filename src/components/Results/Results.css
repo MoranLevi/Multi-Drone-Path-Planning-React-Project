@@ -1,7 +1,7 @@
 #Results {
     padding-top: 35vh;
     display: grid;
-    grid-template-rows: 0.2fr 0.8fr;
+    grid-template-rows: 0.1fr 0.9fr;
     gap: 30px;
     justify-content: center;
     align-items: center;
@@ -25,9 +25,9 @@
     gap: 10px;
     width: 100%;
     height: 100%;
-    min-height: 360px;
+    /* min-height: 360px; */
     overflow-y: auto;
-    overflow-x: hidden;
+    overflow-x: auto;
 }
 
 #Results .drone-path-container {
@@ -49,7 +49,7 @@
 }
 
 .loading-spinner {
-    padding-top: 50vh;
+    /* padding-top: 50vh; */
     display: flex;
     justify-content: center;
     align-items: center;
