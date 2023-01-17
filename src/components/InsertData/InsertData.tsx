@@ -13,7 +13,7 @@ const InsertData: FC = () => {
     const navigate = useNavigate();
     const fileInput = useRef<any>(null); // change type any to the correct type
     
-    const [selectedRadioBtn, setSelectedRadioBtn] = useState<string>('radio2');
+    const [selectedRadioBtn, setSelectedRadioBtn] = useState<string>('radio1');
     const [localNumberOfDrones, setLocalNumberOfDrones] = useState<string>('');
     const [isUploadFile, setIsUploadFile] = useState<boolean>(false);
     const [uploadFile, setUploadFile] = useState<File | undefined>(undefined);
@@ -30,7 +30,7 @@ const InsertData: FC = () => {
     const handleRadioClick = (event: React.ChangeEvent<HTMLInputElement>): void => {
         setSelectedRadioBtn(event.currentTarget.value); // save the value of selected radio button
         setLocalNumberOfDrones(''); // reset the number of drones
-        if(event.currentTarget.value === 'radio1') { // the first time the user clicks on the radio button
+        if(event.currentTarget.value === 'radio2') { // the first time the user clicks on the radio button
             setNumberOfDronesError('');
         } 
         else {
@@ -42,7 +42,7 @@ const InsertData: FC = () => {
         dispatch(UIActions.updateTargetsFile(uploadFile))
         console.warn('uploadFile: ', uploadFile)
 
-        if(selectedRadioBtn === 'radio1') { //number of drones is known
+        if(selectedRadioBtn === 'radio2') { //number of drones is known
             dispatch(UIActions.updateNumberOfDrones(Number(localNumberOfDrones)))
             navigate('/compareNumberOfDrones');
             return;
@@ -89,7 +89,7 @@ const InsertData: FC = () => {
         if(uploadFile === undefined) {
             return true;
         }
-        if(selectedRadioBtn === 'radio1' && numberOfDronesError !== undefined) {
+        if(selectedRadioBtn === 'radio2' && numberOfDronesError !== undefined) {
             return true;
         }
         return false;
@@ -143,20 +143,20 @@ const InsertData: FC = () => {
                 </div>
                 <div className='option-radio-row-container'>
                     <input type='radio' name='radio-btn' value='radio1' checked={isRadioSelected('radio1')} onChange={handleRadioClick}/>
-                    <label className='radio-btn-text'>Number of drones is known</label>
-                    {selectedRadioBtn === 'radio1' && 
-                        <div className='insert-numbers-of-drones-container'>
-                            <label className='required-asterisk'>*</label>
-                            <label className='insert-number-of-drones-text'>Number of drones:</label>
-                            {/* <input type="text" className='insert-number-of-drones-input' value={localNumberOfDrones} onChange={event => setLocalNumberOfDrones(event.target.value)}></input> */}
-                            <input type="text" className='insert-number-of-drones-input' value={localNumberOfDrones} onChange={onChangeNumberOfDrones}></input>
-                        </div>}
-                    {selectedRadioBtn === 'radio1' && 
-                        <span className='error-msg'>{numberOfDronesError}</span>}
+                    <label className='radio-btn-text'>Number of drones is unknown</label>
                 </div>
                 <div className='option-radio-row-container'>
                     <input type='radio' name='radio-btn' value='radio2' checked={isRadioSelected('radio2')} onChange={handleRadioClick}/>
-                    <label className='radio-btn-text'>Number of drones is unknown</label>
+                        <label className='radio-btn-text'>Number of drones is known</label>
+                        {selectedRadioBtn === 'radio2' && 
+                            <div className='insert-numbers-of-drones-container'>
+                                <label className='required-asterisk'>*</label>
+                                <label className='insert-number-of-drones-text'>Number of drones:</label>
+                                {/* <input type="text" className='insert-number-of-drones-input' value={localNumberOfDrones} onChange={event => setLocalNumberOfDrones(event.target.value)}></input> */}
+                                <input type="text" className='insert-number-of-drones-input' value={localNumberOfDrones} onChange={onChangeNumberOfDrones}></input>
+                            </div>}
+                        {selectedRadioBtn === 'radio2' && 
+                            <span className='error-msg'>{numberOfDronesError}</span>}
                 </div>   
             </div>
             <div className='continue-button-container'>
