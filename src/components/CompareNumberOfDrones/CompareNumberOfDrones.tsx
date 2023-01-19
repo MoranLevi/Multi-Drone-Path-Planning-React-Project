@@ -32,11 +32,11 @@ const CompareNumberOfDrones: FC = () => {
     }, {
         enabled: !isOptimalNumberOfDronesData, /* enable the query only if the optimal number of drones data is not fetched yet */
         onError: () => { /* handle error */
-            console.error("fetch error")
+            console.error("fetch error for optimal paths data")
         },
         onSuccess: (data) => { /* handle success */
             setIsOptimalNumberOfDronesData(true); /* set the optimal number of drones data to fetched */
-            console.log("success")
+            console.log("success to fetch optimal paths data")
         }
     })
     

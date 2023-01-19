@@ -27,12 +27,12 @@ const Results: FC = () => {
     }, {
         enabled: !isOptimalNumberOfDronesData && numberOfDrones === -1, /* enable the query only if the optimal number of drones data is not fetched yet, and number of drones is equal to -1 */
         onError: () => { /* handle error */
-            console.error("fetch error")
+            console.error("fetch error for optimal paths data")
         },
         onSuccess: (data) => { /* handle success */
             setIsOptimalNumberOfDronesData(true); /* set the optimal number of drones data to fetched */
             setLocalNumberOfDrones(data.length); /* set the local number of drones to the length of the optimal data */
-            console.log("success1", data)
+            console.log("success to fetch optimal paths data", data)
         }
     })
 
@@ -43,11 +43,11 @@ const Results: FC = () => {
     }, {
         enabled: !isRequiredNumberOfDronesData && numberOfDrones !== -1, /* enable the query only if the required number of drones data is not fetched yet, and number of drones is not equal to -1 */
         onError: () => { /* handle error */
-            console.error("fetch error")
+            console.error("fetch error for required paths data")
         },
         onSuccess: (data) => { /* handle success */
             setIsRequiredNumberOfDronesData(true); /* set the required number of drones data to fetched */
-            console.log("success2", data)
+            console.log("success to fetch required paths data", data)
         }
     })
 
@@ -76,15 +76,15 @@ const Results: FC = () => {
         }
 
         /* return the drones paths */
-        return array.map((arrayOfObjects: any[], index: number) => {
+        return array.map((arrayOfObjects: any[], indexDrone: number) => {
             return (
-                <div className='drone-path-container'>
-                    <h1 className='text-drone'>{`Drone ${index + 1}:`}</h1>
+                <div className='drone-path-container' key={indexDrone}>
+                    <h1 className='text-drone'>{`Drone ${indexDrone + 1}:`}</h1>
                     <div className='drone-path'>
-                        {arrayOfObjects.map((object, index, row) => { /* return the objects of the drone path */
+                        {arrayOfObjects.map((object, indexTarget) => { /* return the objects of the drone path */
                             return (
-                                <div className='drone-path-object'>
-                                    <label className='number-text-drone'>{object + (checkIfLastElement(arrayOfObjects, index) ? ' ->' : '')}</label>
+                                <div className='drone-path-object' key={indexTarget}>
+                                    <label className='number-text-drone'>{object + (checkIfLastElement(arrayOfObjects, indexTarget) ? ' ->' : '')}</label>
                                 </div>
                             )
                         })}
