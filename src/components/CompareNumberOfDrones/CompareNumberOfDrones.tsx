@@ -26,7 +26,7 @@ const CompareNumberOfDrones: FC = () => {
     const fileName = targetsFile ? targetsFile.name : 'TSP100.txt';
 
     /* define query to get the optimal number of drones */
-    const { data: optimalData, isLoading: isOptimalLoading } = useQuery('optimal-targets-classification', async () => {
+    const { data: optimalData, isFetching: isOptimalFetching } = useQuery('optimal-targets-classification', async () => {
         const response = await axios.get(`${Configuration.backend.url}:${Configuration.backend.port}/optimal-targets-classification`, { params: { fileName } })
         return response.data;
     }, {
@@ -57,7 +57,7 @@ const CompareNumberOfDrones: FC = () => {
     /* define function to disable continue with change button */
     const disableContinueWithChangeButton = (): boolean => {
         /* if the number of drones input is empty or there is an error in the number of drones input -> disable the continue with change button */
-        if(localNumberOfDrones === '' || numberOfDronesError !== undefined) {
+        if(localNumberOfDrones === '' || numberOfDronesError !== undefined || isOptimalFetching) {
             return true;
         }
         return false;
@@ -98,7 +98,7 @@ const CompareNumberOfDrones: FC = () => {
                     <h1 className='title-text'>The optimal number of drones </h1>
                     <h1 className='title-text'>the system has calculated:</h1>
                 </div>
-                <label className='number-text'>{isOptimalLoading ? <Spin/> : optimalData.length}</label> {/* display the optimal number of drones, show spinner until its load */}
+                <label className='number-text'>{isOptimalFetching ? <Spin/> : optimalData.length}</label> {/* display the optimal number of drones, show spinner until its load */}
             </div>
             <div className='continue-buttons-container'>
                 <div className='box-continue-with-change-number-of-drones'>
@@ -112,7 +112,7 @@ const CompareNumberOfDrones: FC = () => {
                     </div>
                 </div>
                 <div className='box-continue-without-change-number-of-drones'>
-                    <button className='continue-button' onClick={handleClickContinueWithoutChangeButton} disabled={isOptimalLoading}>Continue without changing the number</button>
+                    <button className='continue-button' onClick={handleClickContinueWithoutChangeButton} disabled={isOptimalFetching}>Continue without changing the number</button>
                 </div>
             </div>
         </div>

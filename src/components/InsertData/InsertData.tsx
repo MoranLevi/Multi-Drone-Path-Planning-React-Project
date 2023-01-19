@@ -45,7 +45,6 @@ const InsertData: FC = () => {
     /* function that handle the click on the continue button */
     const handleClickContinueButton = () => {
         dispatch(UIActions.updateTargetsFile(uploadFile)) /* save the targets file */
-        console.log('uploadFile: ', uploadFile)
 
         if(selectedRadioBtn === 'radio2') { /* number of drones is known */
             dispatch(UIActions.updateNumberOfDrones(Number(localNumberOfDrones))) /* save the number of drones */
