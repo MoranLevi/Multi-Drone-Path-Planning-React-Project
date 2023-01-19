@@ -4,7 +4,6 @@
     padding-top: 25vh;
     padding-bottom: 10vh;
     display: grid;
-    /* grid-template-rows: 0.3fr 0.4fr 0.15fr 0.35fr; */
     grid-template-rows: auto auto auto;
     gap: 20px;
 }
@@ -22,7 +21,6 @@
     display: grid;
     grid-template-rows: repeat(2, 1fr);
     justify-items: left;
-    /* padding-left: 27vw; */
     padding-left: 34vw;
 }
 
@@ -38,8 +36,6 @@
 #InsertData .upload-target-locations-container .upload-file-container {
     width: 100%;
     height: 100%;
-    /* display: grid;
-    grid-template-columns: 0.2fr 0.5fr 0.3fr; */
     display: flex;
     flex-direction: row;
     justify-items: left;
@@ -53,8 +49,6 @@
 }
 
 #InsertData .upload-target-locations-container .upload-file-container .button-upload-file {
-    /* width: 100%;
-    height: 100%; */
     background-color: #eaebee;
     border-radius: 22px;
     box-shadow: rgba(118, 127, 171, 0.2) 0 -25px 18px -14px inset,rgba(130, 141, 189, 0.15) 0 1px 2px,rgba(130, 141, 189, 0.15) 0 2px 4px,rgba(130, 141, 189, 0.15) 0 4px 8px,rgba(130, 141, 189, 0.15) 0 8px 16px,rgba(130, 141, 189, 0.15) 0 16px 32px;
@@ -79,7 +73,6 @@
 }
 
 #InsertData .upload-target-locations-container .upload-file-container .button-upload-file-succeeded {
-    /* background-color: #9db1ea !important; */
     border: 2px solid rgb(9, 9, 96) !important;
     color: rgb(9, 9, 96) !important;
 }
@@ -98,7 +91,6 @@
     grid-template-rows: repeat(3, 1fr);
     justify-items: left;
     align-items: center;
-    /* padding-left: 27vw; */
     padding-left: 34vw;
 }
 
@@ -145,7 +137,6 @@
 #InsertData .continue-button-container .continue-button {
     width: 12%;
     min-width: fit-content;
-    /* height: 100%; */
     background-color: #eaebee;
     border-radius: 100px;
     box-shadow: rgba(130, 141, 189, 0.2) 0 -25px 18px -14px inset,rgba(130, 141, 189, 0.15) 0 1px 2px,rgba(130, 141, 189, 0.15) 0 2px 4px,rgba(130, 141, 189, 0.15) 0 4px 8px,rgba(130, 141, 189, 0.15) 0 8px 16px,rgba(130, 141, 189, 0.15) 0 16px 32px;

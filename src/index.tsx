@@ -1,11 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
 import { Provider } from 'react-redux';
 import { store } from './redux/store';
 import { ELogLevel, ILoggerConfiguration, LoggerFactory } from './logger';
-
+import './index.css';
 
 // First, this config will be the default one, util we fetch our one from backend
 const DEFAULT_CONFIG: ILoggerConfiguration[] = [
@@ -16,10 +15,6 @@ const DEFAULT_CONFIG: ILoggerConfiguration[] = [
     {
         loggerName: 'reducers',
         loggerLevel: ELogLevel.TRACE
-    },
-    {
-        loggerName: 'CounterActions',
-        loggerLevel: ELogLevel.DEBUG
     },
     {
         loggerName: 'app',
@@ -34,12 +29,12 @@ const DEFAULT_CONFIG: ILoggerConfiguration[] = [
 // Finally, on each localStorage user update - we update the logger config again
 
 
-LoggerFactory.init(DEFAULT_CONFIG);
+LoggerFactory.init(DEFAULT_CONFIG); /* Init the logger with the default config */
 
 
 ReactDOM.render(
-    <Provider store={store}>
-        <React.StrictMode>
+    <Provider store={store}> {/* Provide the store to the redux library */}
+        <React.StrictMode> {/* Strict mode is a tool for highlighting potential problems in an application. */}
             <App />
         </React.StrictMode>
     </Provider>,

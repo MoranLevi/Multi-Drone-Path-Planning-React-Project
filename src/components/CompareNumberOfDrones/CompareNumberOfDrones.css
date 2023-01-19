@@ -2,9 +2,6 @@
     width: 100%;
     height: 100%;
     padding-top: 25vh;
-    /* display: grid; */
-    /* grid-template-rows: auto auto auto; */
-    /* grid-template-rows: auto auto auto; */
     display: flex;
     flex-direction: column;
 }
@@ -58,7 +55,6 @@
     justify-items: center;
     align-items: center;
     gap: 40px;
-    /* padding-top: 50px; */
     padding-left: 19.5vw;
 }
 

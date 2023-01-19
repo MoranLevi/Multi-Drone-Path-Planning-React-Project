@@ -1,6 +1,5 @@
-import { FC, useState } from 'react';
-import React from 'react';
-import { useNavigate  } from 'react-router-dom';
+import React, { FC, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from 'src/redux/hooks';
 import { UIActions } from 'src/redux/actions/UIActions';
 import { useQuery } from 'react-query';
@@ -9,59 +8,66 @@ import { Configuration } from 'src/Configuration';
 import axios from 'axios';
 import './CompareNumberOfDrones.css';
 
+/* CompareNumberOfDrones component */
 const CompareNumberOfDrones: FC = () => {
 
-    const dispatch = useAppDispatch();
+    const dispatch = useAppDispatch(); /* define hook to dispatch actions */
+    const navigate = useNavigate(); /* define hook to navigate to other pages */
     
-    const navigate = useNavigate();
-    
+    /* define hook to get the number of drones and the targets file from the redux store */
     const { numberOfDrones, targetsFile } = useAppSelector(state => state.ui.layout);
     
+    /* define the state of the component */
     const [localNumberOfDrones, setLocalNumberOfDrones] = useState<string>('');
     const [numberOfDronesError, setNumberOfDronesError] = useState<string | undefined>(undefined);
     const [isOptimalNumberOfDronesData, setIsOptimalNumberOfDronesData] = useState<boolean>(false);
 
+    /* define default to file name of the file, if targetsFile from redux is undefined */
     const fileName = targetsFile ? targetsFile.name : 'TSP100.txt';
 
-    // optimal number of drones
-    const {data: optimalData, isLoading: isOptimalLoading, isError: isErrorLoading} = useQuery('optimal-targets-classification', async () => {
-        // const response = await axios.get(`http://localhost:8000/optimal-targets-classification`, { params: { fileName } })
+    /* define query to get the optimal number of drones */
+    const { data: optimalData, isLoading: isOptimalLoading } = useQuery('optimal-targets-classification', async () => {
         const response = await axios.get(`${Configuration.backend.url}:${Configuration.backend.port}/optimal-targets-classification`, { params: { fileName } })
         return response.data;
     }, {
-        enabled: !isOptimalNumberOfDronesData,
-        onError: () => {
+        enabled: !isOptimalNumberOfDronesData, /* enable the query only if the optimal number of drones data is not fetched yet */
+        onError: () => { /* handle error */
             console.error("fetch error")
         },
-        onSuccess: (data) => {
-            setIsOptimalNumberOfDronesData(true);
+        onSuccess: (data) => { /* handle success */
+            setIsOptimalNumberOfDronesData(true); /* set the optimal number of drones data to fetched */
             console.log("success")
         }
     })
     
+    /* define function to handle click on continue with change button */
     const handleClickContinueWithChangeButton = () => {
-        if(numberOfDronesError !== undefined) {
+        if(numberOfDronesError !== undefined) { /* if there is an error in the number of drones input */
             return;
         }
-        dispatch(UIActions.updateNumberOfDrones(Number(localNumberOfDrones)))
-        navigate('/results');
+        dispatch(UIActions.updateNumberOfDrones(Number(localNumberOfDrones))) /* update the number of drones in the redux store */
+        navigate('/results'); /* navigate to results page */
     };
 
+    /* define function to handle click on continue without change button */
     const handleClickContinueWithoutChangeButton = () => {
-        navigate('/results');
+        navigate('/results'); /* navigate to results page */
     };
 
+    /* define function to disable continue with change button */
     const disableContinueWithChangeButton = (): boolean => {
+        /* if the number of drones input is empty or there is an error in the number of drones input -> disable the continue with change button */
         if(localNumberOfDrones === '' || numberOfDronesError !== undefined) {
             return true;
         }
         return false;
     };
 
+    /* function that check if the numbersOfDrones that the user insert is valid */
     const onChangeNumberOfDrones = (event: React.ChangeEvent<HTMLInputElement>): void => {
         setLocalNumberOfDrones(event.target.value);
-
         const numberOfDrones = Number(event.target.value);
+
         if(numberOfDrones === 0) {
             setNumberOfDronesError('Required');
             return;
@@ -78,7 +84,7 @@ const CompareNumberOfDrones: FC = () => {
             setNumberOfDronesError('Must be an integer number');
             return;
         }
-        setNumberOfDronesError(undefined);
+        setNumberOfDronesError(undefined); /* the number of drones is valid */
     };
 
     return (
@@ -92,7 +98,7 @@ const CompareNumberOfDrones: FC = () => {
                     <h1 className='title-text'>The optimal number of drones </h1>
                     <h1 className='title-text'>the system has calculated:</h1>
                 </div>
-                <label className='number-text'>{isOptimalLoading ? <Spin/> : optimalData.length}</label>
+                <label className='number-text'>{isOptimalLoading ? <Spin/> : optimalData.length}</label> {/* display the optimal number of drones, show spinner until its load */}
             </div>
             <div className='continue-buttons-container'>
                 <div className='box-continue-with-change-number-of-drones'>
@@ -113,4 +119,4 @@ const CompareNumberOfDrones: FC = () => {
     );
 };
 
-export default CompareNumberOfDrones;
+export default CompareNumberOfDrones; /* export CompareNumberOfDrones component */

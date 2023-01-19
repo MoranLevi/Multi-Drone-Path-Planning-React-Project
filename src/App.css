@@ -30,13 +30,10 @@ button {
 }
 
 #App {
-    /* background-color: #282c34; */
     min-height: 100vh;
-    /* height: 100vh; */
     display: flex;
     flex-direction: column;
     gap: calc(5px + 1vw);
-    /* padding: 3vh; */
 }
 
 .backgroundimg {

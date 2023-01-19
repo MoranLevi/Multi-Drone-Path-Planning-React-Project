@@ -1,36 +1,40 @@
-import React, { useRef } from 'react';
-import { FC, useState } from 'react';
+import React, { useRef, FC, useState } from 'react';
 import { useNavigate  } from 'react-router-dom';
 import { UIActions } from 'src/redux/actions/UIActions';
 import { useAppDispatch } from 'src/redux/hooks';
 import classNames from 'classnames';
 import './InsertData.css';
 
+/* InsertData component */
 const InsertData: FC = () => {
 
-    const dispatch = useAppDispatch();
+    const dispatch = useAppDispatch(); /* define hook to dispatch actions */  
+    const navigate = useNavigate(); /* define hook to navigate to other pages */
     
-    const navigate = useNavigate();
-    const fileInput = useRef<any>(null); // change type any to the correct type
+    const fileInput = useRef<any>(null); /* define a reference to the file input element */
     
+    /* define the state of the component */
     const [selectedRadioBtn, setSelectedRadioBtn] = useState<string>('radio1');
     const [localNumberOfDrones, setLocalNumberOfDrones] = useState<string>('');
     const [isUploadFile, setIsUploadFile] = useState<boolean>(false);
     const [uploadFile, setUploadFile] = useState<File | undefined>(undefined);
     const [numberOfDronesError, setNumberOfDronesError] = useState<string | undefined>(undefined);
     
+    /* define css string for the upload file button, depending on whether a file has already been uploaded or not */
     const uploadFileButtonClassName = classNames('button-upload-file', {
         'button-upload-file-succeeded': isUploadFile,
     })
 
+    /* function that check if radioBtnName is the last radio button than selected */
     const isRadioSelected = (radioBtnName: string): boolean => {
         return (selectedRadioBtn === radioBtnName);
     }
 
+    /* function that handle the click on a radio button */
     const handleRadioClick = (event: React.ChangeEvent<HTMLInputElement>): void => {
-        setSelectedRadioBtn(event.currentTarget.value); // save the value of selected radio button
-        setLocalNumberOfDrones(''); // reset the number of drones
-        if(event.currentTarget.value === 'radio2') { // the first time the user clicks on the radio button
+        setSelectedRadioBtn(event.currentTarget.value); /* save the value of selected radio button */
+        setLocalNumberOfDrones(''); /* reset the number of drones */
+        if(event.currentTarget.value === 'radio2') { /* if the number of drones is known */
             setNumberOfDronesError('');
         } 
         else {
@@ -38,63 +42,57 @@ const InsertData: FC = () => {
         }
     }
 
+    /* function that handle the click on the continue button */
     const handleClickContinueButton = () => {
-        dispatch(UIActions.updateTargetsFile(uploadFile))
+        dispatch(UIActions.updateTargetsFile(uploadFile)) /* save the targets file */
         console.warn('uploadFile: ', uploadFile)
 
-        if(selectedRadioBtn === 'radio2') { //number of drones is known
-            dispatch(UIActions.updateNumberOfDrones(Number(localNumberOfDrones)))
-            navigate('/compareNumberOfDrones');
+        if(selectedRadioBtn === 'radio2') { /* number of drones is known */
+            dispatch(UIActions.updateNumberOfDrones(Number(localNumberOfDrones))) /* save the number of drones */
+            navigate('/compareNumberOfDrones'); /* navigate to the compareNumberOfDrones page */
             return;
         }
 
-        // number of drones is unknown
-        dispatch(UIActions.updateNumberOfDrones(-1)) // -1 means that the number of drones is unknown
-        navigate('/results')
+        /* number of drones is unknown */
+        dispatch(UIActions.updateNumberOfDrones(-1)) /* a value of -1 indicates that the number of drones is unknown */
+        navigate('/results') /* navigate to the results page */
     };
 
-    const handleFileChange = (event: any) => { //change any type to the correct type
+    /* function that handles the file selection made in the file explorer */
+    const handleFileChange = (event: any) => {
         const file = event.target.files[0];
 
+        /* check if a file has been selected */
         if(file) {
             setIsUploadFile(true);
             setUploadFile(file);
         }
-    
-        // if (file) {
-        //   const reader = new FileReader();
-        //   reader.onload = () => {
-        //     const data = new FormData();
-        //     data.append('file', file);
-        //     data.append('fileName', file.name);
-    
-        //     // Send the file to the server using an HTTP library like Axios
-        //     axios.post('/upload', data).then(response => {
-        //       console.log(response);
-        //     });
-        //   };
-        //   reader.readAsArrayBuffer(file);
-        // }
       };
 
+    /* function that handle the click on the upload file button */
     const handleChooseFileClick = () => {
+
+        /* check if the file input element has been rendered */
         if (fileInput.current) {
             fileInput.current.click();
         } else {
           console.log('File input not yet rendered');
         }
       };
-
+    
+    /* function that check if the continue button should be disabled */
     const disableContinueButton = (): boolean => {
-        if(uploadFile === undefined) {
+
+        if(uploadFile === undefined) { /* check if a file has been uploaded */
             return true;
         }
-        if(selectedRadioBtn === 'radio2' && numberOfDronesError !== undefined) {
+        if(selectedRadioBtn === 'radio2' && numberOfDronesError !== undefined) { /* check if the number of drones is valid when click on radio2 */
             return true;
         }
         return false;
     };
 
+    /* function that check if the numbersOfDrones that the user insert is valid */
     const onChangeNumberOfDrones = (event: React.ChangeEvent<HTMLInputElement>): void => {
         setLocalNumberOfDrones(event.target.value);
         const numberOfDrones = Number(event.target.value);
@@ -115,7 +113,7 @@ const InsertData: FC = () => {
             setNumberOfDronesError('Must be an integer number');
             return;
         }
-        setNumberOfDronesError(undefined);
+        setNumberOfDronesError(undefined); /* the number of drones is valid */
     };
 
     return (
@@ -127,7 +125,7 @@ const InsertData: FC = () => {
                 </div>        
                 <div className='upload-file-container'>
                     <label className='upload-file-text'>Upload file:</label>
-                    <form>
+                    <form> {/* form that contains the file input element from file explorer */}
                         <input type="file" accept='.txt' ref={fileInput} onChange={handleFileChange} className='disapper-file-upload'/>
                         <button type="button" onClick={handleChooseFileClick} className={uploadFileButtonClassName}>
                             Choose File
@@ -152,11 +150,10 @@ const InsertData: FC = () => {
                             <div className='insert-numbers-of-drones-container'>
                                 <label className='required-asterisk'>*</label>
                                 <label className='insert-number-of-drones-text'>Number of drones:</label>
-                                {/* <input type="text" className='insert-number-of-drones-input' value={localNumberOfDrones} onChange={event => setLocalNumberOfDrones(event.target.value)}></input> */}
                                 <input type="text" className='insert-number-of-drones-input' value={localNumberOfDrones} onChange={onChangeNumberOfDrones}></input>
                             </div>}
-                        {selectedRadioBtn === 'radio2' && 
-                            <span className='error-msg'>{numberOfDronesError}</span>}
+                        {selectedRadioBtn === 'radio2' &&  
+                            <span className='error-msg'>{numberOfDronesError}</span>} {/* show the error message if the number of drones is not valid */}
                 </div>   
             </div>
             <div className='continue-button-container'>
@@ -166,4 +163,4 @@ const InsertData: FC = () => {
     );
 };
 
-export default InsertData;
+export default InsertData; /* export InsertData component */

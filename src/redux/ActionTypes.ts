@@ -1,4 +1,3 @@
-const DATA               = 'DATA';
 const UI                 = 'UI';
 
 export const ActionTypes = {

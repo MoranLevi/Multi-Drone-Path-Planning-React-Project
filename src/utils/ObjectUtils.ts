@@ -1,3 +1,4 @@
+/* ObjectUtils defines functions that are used on objects */
 export const ObjectUtils = {
     isNumber(obj: any): boolean {
       return typeof obj === 'number';
@@ -5,7 +6,6 @@ export const ObjectUtils = {
     isPositiveNumber(obj: any): boolean {
       return this.isNumber(obj) && obj > 0;
     },
-  
     isZeroOrPositiveNumber(obj: any): boolean {
       return typeof obj === 'number' && obj >= 0;
     },
@@ -14,14 +14,6 @@ export const ObjectUtils = {
     },
     isString(obj: any): boolean {
       return typeof obj === 'string';
-    },
-    removeUnderFinedFields: (obj: any) => {
-      Object.keys(obj).forEach((key) => {
-        if (obj[key] === undefined) {
-          delete obj[key];
-        }
-      });
-      return obj;
     },
     parseJson: (
       text: string,

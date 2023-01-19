@@ -5,18 +5,20 @@ interface IBackend {
     port:                        string;
 }
 
+/* Class for the configuration in the application */
 class Config {
     
-    backend: IBackend;
+    backend: IBackend;  
 
-    constructor() {
+    constructor() { 
         this.backend = {
             url:                        'http://localhost',
             port:                       '8000',
         };
     }
 
-    load() {
+    /* Load the configuration from the config.json file */
+    load() { 
         const configRequest = new XMLHttpRequest();
         configRequest.open('GET', 'config.json', false);
         configRequest.send();
@@ -24,15 +26,16 @@ class Config {
         this.setConfigProps(configJson);
     }
 
+    /* Set the configuration properties */
     setConfigProps(configJson: any) {
         const { backend } = configJson;
 
         // Backend
-        if (backend) {
-            if (ObjectUtils.isString(backend.url)) {
+        if (backend) { 
+            if (ObjectUtils.isString(backend.url)) { /* Check if the url is a string */
                 this.backend.url = backend.url;
             }
-            if (ObjectUtils.isString(backend.port)) {
+            if (ObjectUtils.isString(backend.port)) { /* Check if the port is a string */
                 this.backend.port = backend.port;
             }
         }
