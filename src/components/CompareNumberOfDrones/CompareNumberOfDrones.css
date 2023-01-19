@@ -128,7 +128,8 @@
     transform: scale(1.05);
 }
 
-#CompareNumberOfDrones .continue-buttons-container .box-continue-with-change-number-of-drones .continue-button:disabled {
+#CompareNumberOfDrones .continue-buttons-container .box-continue-with-change-number-of-drones .continue-button:disabled,
+#CompareNumberOfDrones .continue-buttons-container .box-continue-without-change-number-of-drones .continue-button:disabled {
     opacity: 0.6;
     cursor: no-drop;
 }

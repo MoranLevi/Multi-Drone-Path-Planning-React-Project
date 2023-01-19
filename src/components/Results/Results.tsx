@@ -21,7 +21,7 @@ const Results: FC = () => {
     const fileName = targetsFile ? targetsFile.name : 'TSP100.txt';
 
     /* define query to get the routes of the drones for the optimal number of drones */
-    const { data: optimalData, isLoading: isOptimalLoading } = useQuery('optimal-targets-classification', async () => {
+    const { data: optimalData, isFetching: isOptimalFetching } = useQuery('optimal-targets-classification', async () => {
         const response = await axios.get(`${Configuration.backend.url}:${Configuration.backend.port}/optimal-targets-classification`, { params: { fileName } })
         return response.data;
     }, {
@@ -32,12 +32,12 @@ const Results: FC = () => {
         onSuccess: (data) => { /* handle success */
             setIsOptimalNumberOfDronesData(true); /* set the optimal number of drones data to fetched */
             setLocalNumberOfDrones(data.length); /* set the local number of drones to the length of the optimal data */
-            console.log("success", data)
+            console.log("success1", data)
         }
     })
 
     /* define query to get the routes of the drones for the specified number of drones entered by the user */
-    const { data: requiredData, isLoading: isRequiredLoading } = useQuery('required-targets-classification', async () => {
+    const { data: requiredData, isFetching: isRequiredFetching } = useQuery('required-targets-classification', async () => {
         const response = await axios.get(`${Configuration.backend.url}:${Configuration.backend.port}/required-targets-classification`, { params: { fileName, numberOfDrones } })
         return response.data;
     }, {
@@ -47,12 +47,12 @@ const Results: FC = () => {
         },
         onSuccess: (data) => { /* handle success */
             setIsRequiredNumberOfDronesData(true); /* set the required number of drones data to fetched */
-            console.log("success", data)
+            console.log("success2", data)
         }
     })
 
-    /* render the loading spinner if the data is loading */
-    if (isOptimalLoading || isRequiredLoading) {
+    /* render the loading spinner if the data is fetching */
+    if (isOptimalFetching || isRequiredFetching) {
         return (
             <div className='loading-spinner'>
                 <Spin size="large" tip="Loading..."/>

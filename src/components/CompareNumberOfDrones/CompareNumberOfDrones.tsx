@@ -112,7 +112,7 @@ const CompareNumberOfDrones: FC = () => {
                     </div>
                 </div>
                 <div className='box-continue-without-change-number-of-drones'>
-                    <button className='continue-button' onClick={handleClickContinueWithoutChangeButton}>Continue without changing the number</button>
+                    <button className='continue-button' onClick={handleClickContinueWithoutChangeButton} disabled={isOptimalLoading}>Continue without changing the number</button>
                 </div>
             </div>
         </div>
